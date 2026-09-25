@@ -1,0 +1,37 @@
+name: Fechamento Semanal DUX (sexta 18h BRT)
+
+on:
+  schedule:
+    - cron: "0 21 * * 5"   # sexta-feira 21:00 UTC = 18:00 BRT
+  workflow_dispatch: {}     # permite rodar manualmente pra testar
+
+permissions:
+  contents: write
+
+jobs:
+  close-week:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Gerar o fechamento da semana
+        env:
+          LINEAR_API_KEY: ${{ secrets.LINEAR_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/weekly-closing.mjs
+
+      - name: Publicar
+        run: |
+          git config user.name "dux-cockpit-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add index.html HISTORICO.md
+          if git diff --cached --quiet; then
+            echo "Nada para commitar (já fechado ou sem mudanças)."
+          else
+            git commit -m "chore: fechamento semanal do Cockpit DUX"
+            git push
+          fi
