@@ -1,62 +1,66 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Cockpit de Projetos DUX</title>
 <style>
   :root{
-    --bg:#EEF2F0;
+    /* Brand DUX — brandbook.wearedux.com: Amarelo DUX #F8AB1A, Preto, Branco, Amarelo Apoio #FAF43F, Cinza Claro #F8F8F6 */
+    --bg:#F8F8F6;
     --surface:#FFFFFF;
-    --surface-muted:#F5F7F6;
-    --line:#D9E1DE;
-    --line-strong:#C2CDC9;
-    --ink:#10171A;
-    --ink-soft:#57666B;
-    --ink-faint:#8B9997;
-    --accent:#1F6F5C;
-    --accent-strong:#14503F;
-    --accent-soft:#E1F0EA;
+    --surface-muted:#F1F1ED;
+    --line:#E3E3DE;
+    --line-strong:#CFCFC7;
+    --ink:#000000;
+    --ink-soft:#4A4A45;
+    --ink-faint:#86867E;
+    --accent:#F8AB1A;
+    --accent-strong:#8A5A0A;
+    --accent-soft:#FDF1D6;
+    --support:#FAF43F;
+    --support-soft:#FEFBD0;
     --st-progress:#2E5EDB;
     --st-progress-soft:#E3EAFB;
     --st-qa:#B8720F;
     --st-qa-soft:#FBEEDD;
-    --st-done:#1F6F5C;
-    --st-done-soft:#E1F0EA;
-    --st-build:#7C8A88;
-    --st-build-soft:#ECEFEE;
+    --st-done:#1E7A4C;
+    --st-done-soft:#E1F3E8;
+    --st-build:#86867E;
+    --st-build-soft:#EDEDE9;
+    --st-priorized:#0E7C86;
+    --st-priorized-soft:#DFF1F2;
     --blk-int:#6B5B95;
     --blk-int-soft:#EFEAF6;
     --blk-ext:#C0392B;
     --blk-ext-soft:#FBEAE8;
-    --area-mkt:#9A7B0A;
+    --area-mkt:#9A6B0A;
     --area-mkt-soft:#FBF1D2;
     --area-fin:#1B6E8C;
     --area-fin-soft:#DDEEF3;
-    --shadow: 0 1px 2px rgba(16,23,26,0.04), 0 6px 20px -8px rgba(16,23,26,0.10);
+    --shadow: 0 1px 2px rgba(0,0,0,0.05), 0 6px 20px -8px rgba(0,0,0,0.12);
     color-scheme: light;
   }
   @media (prefers-color-scheme: dark){
     :root:not([data-theme="light"]){
-      --bg:#0E1413;
-      --surface:#161D1C;
-      --surface-muted:#1B2322;
-      --line:#2A3432;
-      --line-strong:#374240;
-      --ink:#EAF1EE;
-      --ink-soft:#9FB0AC;
-      --ink-faint:#6C7C79;
-      --accent:#4FD8B0;
-      --accent-strong:#79E6C4;
-      --accent-soft:#163029;
+      --bg:#0A0A09;
+      --surface:#161613;
+      --surface-muted:#1D1D19;
+      --line:#2E2E28;
+      --line-strong:#3D3D35;
+      --ink:#F5F5F0;
+      --ink-soft:#B8B8AE;
+      --ink-faint:#7D7D74;
+      --accent:#F8AB1A;
+      --accent-strong:#FFC94D;
+      --accent-soft:#3A2C0E;
+      --support:#FAF43F;
+      --support-soft:#3A390F;
       --st-progress:#7C9CFF;
       --st-progress-soft:#1B2540;
       --st-qa:#E3A64B;
       --st-qa-soft:#2E2213;
-      --st-done:#4FD8B0;
+      --st-done:#3DDB93;
       --st-done-soft:#163029;
-      --st-build:#8B9997;
+      --st-build:#A0A096;
       --st-build-soft:#202826;
+      --st-priorized:#4FD1DB;
+      --st-priorized-soft:#123338;
       --blk-int:#B9A6E0;
       --blk-int-soft:#2A2340;
       --blk-ext:#E8897D;
@@ -69,25 +73,29 @@
     }
   }
   :root[data-theme="dark"]{
-    --bg:#0E1413;
-    --surface:#161D1C;
-    --surface-muted:#1B2322;
-    --line:#2A3432;
-    --line-strong:#374240;
-    --ink:#EAF1EE;
-    --ink-soft:#9FB0AC;
-    --ink-faint:#6C7C79;
-    --accent:#4FD8B0;
-    --accent-strong:#79E6C4;
-    --accent-soft:#163029;
+    --bg:#0A0A09;
+    --surface:#161613;
+    --surface-muted:#1D1D19;
+    --line:#2E2E28;
+    --line-strong:#3D3D35;
+    --ink:#F5F5F0;
+    --ink-soft:#B8B8AE;
+    --ink-faint:#7D7D74;
+    --accent:#F8AB1A;
+    --accent-strong:#FFC94D;
+    --accent-soft:#3A2C0E;
+    --support:#FAF43F;
+    --support-soft:#3A390F;
     --st-progress:#7C9CFF;
     --st-progress-soft:#1B2540;
     --st-qa:#E3A64B;
     --st-qa-soft:#2E2213;
-    --st-done:#4FD8B0;
+    --st-done:#3DDB93;
     --st-done-soft:#163029;
-    --st-build:#8B9997;
+    --st-build:#A0A096;
     --st-build-soft:#202826;
+    --st-priorized:#4FD1DB;
+    --st-priorized-soft:#123338;
     --blk-int:#B9A6E0;
     --blk-int-soft:#2A2340;
     --blk-ext:#E8897D;
@@ -103,14 +111,14 @@
   body{
     background:var(--bg);
     color:var(--ink);
-    font-family:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    font-family:"Exo 2","Inter","Segoe UI",system-ui,sans-serif;
     padding-inline:20px;
     padding-block:28px 60px;
     max-width:1280px;
     margin:0 auto;
   }
-  h1,h2,h3{font-family:"Sora","IBM Plex Sans",sans-serif; margin:0; text-wrap:balance;}
-  .mono{font-family:"IBM Plex Mono","SFMono-Regular",monospace;}
+  h1,h2,h3{font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif; margin:0; text-wrap:balance;}
+  .mono{font-family:"Roboto Mono","SFMono-Regular",monospace;}
   a{color:inherit;}
 
   /* ---------- Header ---------- */
@@ -136,7 +144,7 @@
     border-radius:10px; padding:10px 16px; box-shadow:var(--shadow);
   }
   .weekbox .label{font-size:10px; text-transform:uppercase; letter-spacing:.1em; color:var(--ink-faint);}
-  .weekbox .value{font-family:"IBM Plex Mono",monospace; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums;}
+  .weekbox .value{font-family:"Roboto Mono",monospace; font-size:15px; font-weight:600; font-variant-numeric:tabular-nums;}
   .weeknav{display:flex; gap:4px;}
   .weeknav button{
     border:1px solid var(--line-strong); background:var(--surface-muted); color:var(--ink-soft);
@@ -146,6 +154,13 @@
   .weeknav button:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
 
   .subline{color:var(--ink-soft); font-size:13.5px; max-width:640px; margin-top:2px;}
+
+  /* ---------- Section head (title + optional week nav, inside a tab) ---------- */
+  .section-head{
+    display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px;
+    padding-bottom:14px; border-bottom:1px solid var(--line-strong); margin-bottom:20px;
+  }
+  .section-head h2{font-size:20px; font-weight:700; letter-spacing:-.01em;}
 
   /* ---------- Legend ---------- */
   .legend{
@@ -158,17 +173,18 @@
   /* ---------- Grid ---------- */
   .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));
-    gap:18px;
+    grid-template-columns:repeat(2, 1fr);
+    gap:22px;
   }
+  @media (max-width:860px){ .grid{grid-template-columns:1fr;} }
 
   .card{
     background:var(--surface);
     border:1px solid var(--line);
     border-radius:14px;
     box-shadow:var(--shadow);
-    padding:18px 20px 16px;
-    display:flex; flex-direction:column; gap:12px;
+    padding:24px 28px 22px;
+    display:flex; flex-direction:column; gap:16px;
     transition:transform .15s ease, box-shadow .15s ease;
   }
   .card:hover{transform:translateY(-2px);}
@@ -214,26 +230,31 @@
     flex:0 0 auto; width:15px; height:15px; border-radius:50%;
     background:var(--accent-soft); color:var(--accent-strong);
     font-size:9.5px; font-weight:700; display:flex; align-items:center; justify-content:center;
-    margin-top:1px; font-family:"IBM Plex Mono",monospace;
+    margin-top:1px; font-family:"Roboto Mono",monospace;
   }
   .goal-row .goal-list p{margin:0; color:var(--ink);}
 
   .board{
-    display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px;
+    display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px;
+    padding-top:2px; border-top:1px solid var(--line);
   }
-  @media (max-width:520px){ .board{grid-template-columns:1fr;} }
-  .col{background:var(--surface-muted); border-radius:10px; padding:10px 10px 8px; display:flex; flex-direction:column; gap:6px; min-height:70px;}
+  @media (max-width:620px){ .board{grid-template-columns:1fr;} }
+  .col{background:var(--surface-muted); border-radius:10px; padding:11px 11px 9px; display:flex; flex-direction:column; gap:7px; min-height:76px;}
   .col-head{display:flex; align-items:center; gap:6px; font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; font-weight:700;}
   .col-head .dot{width:7px; height:7px; border-radius:50%;}
   .col.progress .col-head{color:var(--st-progress);}
   .col.qa .col-head{color:var(--st-qa);}
   .col.done .col-head{color:var(--st-done);}
-  .task{font-size:12px; line-height:1.35; display:flex; gap:6px;}
-  .task .id{color:var(--ink-faint); font-size:10.5px; flex:0 0 auto; padding-top:1px;}
-  .task .who{display:block; font-size:10px; color:var(--ink-faint); margin-top:1px;}
+  .task{
+    display:flex; flex-direction:column; gap:3px;
+    background:var(--surface); border-radius:7px; padding:7px 9px;
+  }
+  .task .id{color:var(--ink-faint); font-size:10px; letter-spacing:.02em;}
+  .task .title{font-size:12.5px; line-height:1.4; color:var(--ink);}
+  .task .who{font-size:10.5px; color:var(--ink-faint);}
   .empty{font-size:11.5px; color:var(--ink-faint); font-style:italic;}
 
-  .metrics-head{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--ink-faint); margin-top:2px;}
+  .metrics-head{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--ink-faint); margin-top:2px; padding-top:12px; border-top:1px solid var(--line);}
   .distro{display:flex; height:8px; border-radius:100px; overflow:hidden; background:var(--surface-muted); margin-top:6px;}
   .distro div{height:100%;}
   .distro-legend{display:flex; flex-wrap:wrap; gap:8px 12px; font-size:10.5px; color:var(--ink-soft); margin-top:6px;}
@@ -241,7 +262,7 @@
 
   .kpis{display:flex; gap:10px; margin-top:6px; flex-wrap:wrap;}
   .kpi{flex:1 1 90px; background:var(--surface-muted); border:1px dashed var(--line-strong); border-radius:9px; padding:8px 10px;}
-  .kpi .n{font-family:"IBM Plex Mono",monospace; font-size:16px; font-weight:600; color:var(--ink-faint);}
+  .kpi .n{font-family:"Roboto Mono",monospace; font-size:16px; font-weight:600; color:var(--ink-faint);}
   .kpi .l{font-size:10px; color:var(--ink-faint); margin-top:2px;}
 
   .build-body{display:flex; flex-direction:column; align-items:flex-start; gap:6px; padding-block:10px 2px; color:var(--ink-soft); font-size:13px;}
@@ -249,12 +270,12 @@
 
   .milestone{display:flex; flex-direction:column; gap:6px; background:var(--accent-soft); border-radius:10px; padding:10px 12px; margin-top:2px;}
   .milestone-head{display:flex; justify-content:space-between; align-items:baseline; gap:8px; font-size:11.5px; font-weight:700; color:var(--accent-strong);}
-  .milestone-head .date{font-size:10px; font-weight:600; color:var(--accent-strong); font-family:"IBM Plex Mono",monospace; white-space:nowrap;}
+  .milestone-head .date{font-size:10px; font-weight:600; color:var(--accent-strong); font-family:"Roboto Mono",monospace; white-space:nowrap;}
   .milestone-bar{height:7px; border-radius:100px; background:var(--surface); overflow:hidden;}
   .milestone-bar div{height:100%; background:var(--accent-strong); border-radius:100px;}
   .milestone-count{font-size:11px; color:var(--ink-soft);}
 
-  .blockers{display:flex; flex-direction:column; gap:7px; margin-top:2px;}
+  .blockers{display:flex; flex-direction:column; gap:7px; margin-top:2px; padding-top:12px; border-top:1px solid var(--line);}
   .blockers-head{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--ink-faint);}
   .blocker{display:flex; gap:8px; align-items:flex-start; font-size:12px; line-height:1.4;}
   .blocker p{margin:0; color:var(--ink);}
@@ -270,6 +291,20 @@
   .chip.fin{background:var(--area-fin-soft); color:var(--area-fin);}
   .chip.other{background:var(--surface-muted); color:var(--ink-faint); border:1px solid var(--line);}
 
+  /* Tipo de task — distinctly outlined/monospace, so it reads separately from Áreas (filled pills) */
+  .types{margin-top:8px; display:flex; flex-direction:column; gap:6px;}
+  .types-head{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--ink-faint);}
+  .type-chips{display:flex; flex-wrap:wrap; gap:6px;}
+  .tchip{
+    font-family:"Roboto Mono","SFMono-Regular",monospace; font-size:10.5px; font-weight:600;
+    padding:2px 8px; border-radius:4px; white-space:nowrap; font-variant-numeric:tabular-nums;
+    background:transparent; border:1px solid var(--line-strong); color:var(--ink-soft);
+  }
+  .tchip.bug{border-color:var(--blk-ext); color:var(--blk-ext);}
+  .tchip.melhoria{border-color:var(--st-progress); color:var(--st-progress);}
+  .tchip.feature{border-color:var(--st-done); color:var(--st-done);}
+  .tchip.outros{border-color:var(--line-strong); color:var(--ink-faint);}
+
   .footer{
     margin-top:30px; padding-top:14px; border-top:1px solid var(--line);
     font-size:11.5px; color:var(--ink-faint); display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
@@ -281,7 +316,7 @@
   }
   .closing-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
   .closing-head h2{font-size:16px; font-weight:700;}
-  .closing-week{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--ink-faint);}
+  .closing-week{font-family:"Roboto Mono",monospace; font-size:12px; color:var(--ink-faint);}
   .closing-sub{font-size:12px; color:var(--ink-soft); margin-bottom:10px;}
   .closing-empty{font-size:13px; color:var(--ink-faint); font-style:italic; padding-block:8px;}
   .closing-body{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:16px; align-items:start;}
@@ -289,23 +324,293 @@
   .closing-chart{background:var(--surface-muted); border-radius:10px; padding:10px;}
   .closing-col-head{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--ink-faint); margin-bottom:6px;}
   .closing-col ul{margin:0; padding-left:16px; display:flex; flex-direction:column; gap:5px; font-size:12.5px; color:var(--ink);}
+
+  /* ---------- Site nav (brand chrome — always black/yellow, independent of theme) ---------- */
+  .site-nav{
+    width:100vw; position:relative; left:50%; right:50%; margin-left:-50vw; margin-right:-50vw;
+    background:#000; border-bottom:3px solid var(--accent); margin-bottom:28px;
+  }
+  .site-nav-inner{
+    max-width:1280px; margin:0 auto; padding:0 20px; min-height:56px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  }
+  .site-nav-brand{display:flex; align-items:center; gap:9px; padding:10px 0;}
+  .site-nav-mark{width:18px; height:18px; border-radius:4px; background:var(--accent); flex:0 0 auto;}
+  .site-nav-word{
+    font-family:"Space Grotesk","Helvetica Neue",Arial,sans-serif; font-weight:700; font-size:15px;
+    letter-spacing:.03em; color:#fff; text-transform:uppercase; white-space:nowrap;
+  }
+  .site-nav-word b{color:var(--accent); font-weight:700;}
+
+  /* ---------- Tabs / pages ---------- */
+  .tabs{display:flex; gap:4px; margin:0; padding:8px 0; flex-wrap:wrap;}
+  .tab-btn{
+    border:1px solid transparent; background:transparent; color:rgba(255,255,255,.6);
+    font-family:"Exo 2",inherit; font-size:13px; font-weight:600; padding:8px 16px; border-radius:8px;
+    cursor:pointer; transition:background .15s ease, color .15s ease;
+  }
+  .tab-btn:hover{background:rgba(255,255,255,.08); color:#fff;}
+  .tab-btn:focus-visible{outline:2px solid var(--accent); outline-offset:1px;}
+  .tab-btn.active{background:var(--accent); color:#000;}
+  .page[hidden]{display:none;}
+
+  /* ---------- Levantamento de Ferramentas ---------- */
+  .tools-group{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    box-shadow:var(--shadow); margin-bottom:18px; overflow:hidden;
+  }
+  .tools-group-head{
+    display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    padding:14px 18px; background:var(--surface-muted); border-bottom:1px solid var(--line);
+    border-left:4px solid var(--accent);
+  }
+  .tools-group-head h2{font-size:16.5px; font-weight:700; letter-spacing:.005em;}
+  .tools-group-sub{font-size:11px; color:var(--ink-faint); font-family:"Roboto Mono",monospace;}
+  .tools-table-wrap{overflow-x:auto;}
+  .tools-table{width:100%; border-collapse:collapse; font-size:12.5px;}
+  .tools-table th{
+    text-align:left; font-size:10px; text-transform:uppercase; letter-spacing:.06em;
+    color:var(--ink-faint); font-weight:700; padding:9px 14px; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  .tools-table td{padding:12px 14px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink);}
+  .tools-table tr:last-child td{border-bottom:none;}
+  .tools-table tbody tr:hover td{background:var(--surface-muted);}
+  .tool-name{font-weight:700; white-space:nowrap;}
+  .tool-desc{color:var(--ink-soft); min-width:220px;}
+  .tool-owner{white-space:nowrap; font-weight:600;}
+  .tool-who{color:var(--ink-soft); white-space:nowrap;}
+  .tool-next{color:var(--ink-soft); min-width:200px;}
+  .status-pill{font-size:10.5px; font-weight:600; padding:3px 10px; border-radius:100px; white-space:nowrap; display:inline-block;}
+  .status-pill.uso{background:var(--st-done-soft); color:var(--st-done);}
+  .status-pill.construcao{background:var(--st-progress-soft); color:var(--st-progress);}
+  .status-pill.pausado{background:var(--st-build-soft); color:var(--st-build); border:1px dashed var(--st-build);}
+  .status-pill.incipiente{background:var(--st-qa-soft); color:var(--st-qa);}
+  .status-pill.prototipo{background:var(--blk-int-soft); color:var(--blk-int);}
+  .env-pill{
+    font-size:10.5px; font-weight:600; padding:3px 10px; border-radius:100px; white-space:nowrap;
+    display:inline-block; background:var(--surface-muted); color:var(--ink-soft); border:1px solid var(--line-strong);
+  }
+  .core-dot{display:inline-flex; align-items:center; gap:5px; white-space:nowrap; font-size:12px;}
+  .core-dot .dot{width:7px; height:7px; border-radius:50%;}
+  .core-dot.sim .dot{background:var(--st-done);}
+  .core-dot.sim{color:var(--accent-strong); font-weight:600;}
+  .core-dot.nao .dot{background:var(--ink-faint);}
+  .core-dot.nao{color:var(--ink-faint);}
+  .core-note{
+    background:var(--accent-soft); border-radius:14px; padding:16px 20px;
+    font-size:12.5px; color:var(--ink); display:flex; flex-direction:column; gap:8px;
+  }
+  .core-note h3{font-size:13.5px; font-weight:700; color:var(--accent-strong);}
+  .core-note > p{margin:0; color:var(--ink-soft); line-height:1.45;}
+  .core-note-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:14px; margin-top:4px;}
+  .core-note-grid .k{font-size:10px; text-transform:uppercase; letter-spacing:.06em; font-weight:700; color:var(--accent-strong); display:block; margin-bottom:3px;}
+  .core-note-grid p{margin:0; color:var(--ink-soft); font-size:12px; line-height:1.4;}
+
+  /* ---------- Reportar Ferramenta (form) ---------- */
+  .report-wrap{max-width:640px; margin:0 auto;}
+  .report-intro{margin-bottom:20px;}
+  .report-intro h2{font-size:20px; font-weight:700; margin-bottom:6px;}
+  .report-intro p{font-size:13px; color:var(--ink-soft); line-height:1.5;}
+  .report-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px;
+    box-shadow:var(--shadow); padding:26px 28px;
+  }
+  .field{margin-bottom:18px;}
+  .field label{
+    display:block; font-size:12px; font-weight:700; color:var(--ink); margin-bottom:6px;
+  }
+  .field .hint{font-size:11px; color:var(--ink-faint); font-weight:400; margin-top:4px; display:block;}
+  .field input[type="text"], .field input[type="url"], .field input[type="date"],
+  .field select, .field textarea{
+    width:100%; font-family:inherit; font-size:13px; color:var(--ink);
+    background:var(--surface); border:1px solid var(--line-strong); border-radius:8px;
+    padding:9px 12px; transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  .field textarea{resize:vertical; min-height:64px; line-height:1.45;}
+  .field input:focus, .field select:focus, .field textarea:focus{
+    outline:none; border-color:var(--accent); box-shadow:0 0 0 3px var(--accent-soft);
+  }
+  .field input[type="file"]{
+    width:100%; font-size:12px; color:var(--ink-soft);
+    border:1px dashed var(--line-strong); border-radius:8px; padding:12px; background:var(--surface-muted);
+  }
+  .toggle-group{display:flex; gap:8px; flex-wrap:wrap;}
+  .toggle-opt{
+    border:1px solid var(--line-strong); background:var(--surface); color:var(--ink-soft);
+    font-family:inherit; font-size:12.5px; font-weight:600; padding:7px 14px; border-radius:100px;
+    cursor:pointer; transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .toggle-opt:hover{background:var(--surface-muted);}
+  .toggle-opt.selected{background:var(--accent); border-color:var(--accent); color:#000;}
+  .field-conditional{margin-top:10px; padding-left:2px;}
+  .form-submit{
+    display:inline-flex; align-items:center; gap:8px; margin-top:4px;
+    background:var(--accent); color:#000; border:none; border-radius:100px;
+    font-family:inherit; font-size:13.5px; font-weight:700; padding:11px 24px;
+    cursor:pointer; transition:filter .15s ease;
+  }
+  .form-submit:hover{filter:brightness(0.95);}
+  .form-submit:disabled{opacity:.6; cursor:not-allowed;}
+  .form-banner{
+    border-radius:10px; padding:12px 16px; font-size:12.5px; margin-bottom:16px; display:none;
+  }
+  .form-banner.show{display:block;}
+  .form-banner.ok{background:var(--st-done-soft); color:var(--st-done);}
+  .form-banner.err{background:var(--blk-ext-soft); color:var(--blk-ext);}
+  .form-banner.info{background:var(--surface-muted); color:var(--ink-soft); border:1px solid var(--line);}
+  .required-mark{color:var(--blk-ext);}
+
+  /* ---------- Ferramentas Reportadas ---------- */
+  .reported-area{margin-bottom:16px;}
+  .reported-area-head{
+    display:flex; align-items:center; gap:8px; font-size:12.5px; text-transform:uppercase;
+    letter-spacing:.07em; font-weight:700; color:var(--ink); padding:11px 18px;
+    background:var(--surface-muted); border-bottom:1px solid var(--line);
+    cursor:pointer; list-style:none; user-select:none;
+  }
+  .reported-area-head::-webkit-details-marker{display:none;}
+  .reported-area-head::before{
+    content:'▸'; font-size:9px; color:var(--ink-faint); transition:transform .15s ease; flex:0 0 auto;
+  }
+  details.reported-area[open] > .reported-area-head::before{ transform:rotate(90deg); }
+  .reported-area-head .count{
+    font-family:"Roboto Mono",monospace; font-weight:600; color:var(--ink-soft);
+    background:var(--surface); border:1px solid var(--line); border-radius:100px; padding:1px 8px; font-size:10px;
+  }
+  .reported-card{padding:14px 18px; border-bottom:1px solid var(--line);}
+  .reported-card:last-child{border-bottom:none;}
+  .reported-card-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+  .reported-card-head h4{font-size:13.5px; font-weight:700; color:var(--ink);}
+  .reported-meta{font-size:11px; color:var(--ink-faint); font-family:"Roboto Mono",monospace;}
+  .reported-desc{font-size:12.5px; color:var(--ink-soft); line-height:1.45; margin-bottom:8px;}
+  .reported-tags{display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px;}
+  .reported-links{display:flex; gap:12px; flex-wrap:wrap; font-size:11.5px;}
+  .reported-links a{color:var(--accent-strong); font-weight:600; text-decoration:none;}
+  .reported-links a:hover{text-decoration:underline;}
+  .reported-empty{padding:22px 18px; font-size:12.5px; color:var(--ink-faint); font-style:italic;}
+
+  /* ---------- Ações no topo do Levantamento de Ferramentas ---------- */
+  .tools-actions{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px;}
+  .tools-action-btn{
+    border:1px solid var(--line-strong); background:var(--surface); color:var(--ink);
+    font-family:inherit; font-size:12.5px; font-weight:700; padding:9px 16px; border-radius:100px;
+    cursor:pointer; transition:background .15s ease, border-color .15s ease;
+  }
+  .tools-action-btn:hover{background:var(--surface-muted);}
+  .tools-action-btn.primary{background:var(--accent); border-color:var(--accent); color:#000;}
+  .tools-action-btn.primary:hover{filter:brightness(0.95);}
+
+  /* ---------- Modais (Reportar Ferramenta / Reportar Inovação) ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:1000;
+    display:flex; align-items:flex-start; justify-content:center; padding:40px 16px; overflow-y:auto;
+  }
+  .modal-overlay[hidden]{display:none;}
+  .modal{
+    background:var(--surface); border-radius:16px; box-shadow:var(--shadow);
+    max-width:640px; width:100%; margin-bottom:40px;
+  }
+  .modal-head{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:18px 24px; border-bottom:1px solid var(--line);
+    position:sticky; top:0; background:var(--surface); border-radius:16px 16px 0 0; z-index:1;
+  }
+  .modal-head h2{font-size:17px; font-weight:700;}
+  .modal-close{
+    background:none; border:none; font-size:22px; line-height:1; color:var(--ink-faint);
+    cursor:pointer; padding:2px 8px; border-radius:6px;
+  }
+  .modal-close:hover{background:var(--surface-muted); color:var(--ink);}
+  .modal-body{padding:22px 24px 26px;}
+  .report-hint{font-size:12.5px; color:var(--ink-soft); line-height:1.5; margin-bottom:16px;}
+  .copy-box{
+    font-family:"Roboto Mono",monospace !important; font-size:10.5px !important; color:var(--ink-soft) !important;
+    background:var(--surface-muted) !important; line-height:1.5;
+  }
+
+  /* ---------- Inovações Reportadas ---------- */
+  .innovation-card{padding:16px 18px; border-bottom:1px solid var(--line);}
+  .innovation-card:last-child{border-bottom:none;}
+  .innovation-card-head{display:flex; align-items:baseline; justify-content:space-between; gap:10px; flex-wrap:wrap; margin-bottom:4px;}
+  .innovation-card-head h4{font-size:13.5px; font-weight:700; color:var(--ink);}
+  .innovation-meta{font-size:11px; color:var(--ink-faint); font-family:"Roboto Mono",monospace; margin-bottom:8px;}
+  .innovation-text{
+    font-size:12.5px; color:var(--ink); line-height:1.55; white-space:pre-wrap;
+    background:var(--surface-muted); border-radius:8px; padding:12px 14px; margin-bottom:8px;
+  }
+  .innovation-download{
+    background:none; border:1px solid var(--line-strong); color:var(--ink-soft);
+    font-family:inherit; font-size:11px; font-weight:600; padding:5px 12px; border-radius:100px; cursor:pointer;
+  }
+  .innovation-download:hover{background:var(--surface-muted); color:var(--ink);}
+
+  /* ---------- Mídia anexada (prints/vídeo) no modal de detalhe ---------- */
+  .detail-media{display:flex; flex-wrap:wrap; gap:14px; margin-top:4px;}
+  .detail-media-item{display:flex; flex-direction:column; gap:6px; width:200px;}
+  .detail-media-item .detail-media-img{
+    width:200px; max-height:160px; object-fit:cover; border-radius:8px;
+    border:1px solid var(--line); background:var(--surface-muted);
+  }
+  .detail-media-item video.detail-media-img{object-fit:contain; max-height:140px;}
+  .detail-media-missing{
+    font-size:11.5px; color:var(--ink-faint); font-style:italic; background:var(--surface-muted);
+    border:1px dashed var(--line-strong); border-radius:8px; padding:18px 10px; text-align:center;
+  }
+  .detail-media-item a{font-size:11px; color:var(--accent-strong); font-weight:600; text-decoration:none;}
+  .detail-media-item a:hover{text-decoration:underline;}
+
+  /* ---------- Linhas compactas (Ferramentas/Inovações Reportadas) + ícone de detalhe ---------- */
+  .icon-eye-btn{
+    background:none; border:1px solid var(--line-strong); color:var(--ink-soft);
+    line-height:1; padding:7px 10px; border-radius:100px; cursor:pointer;
+    white-space:nowrap; display:inline-flex; align-items:center; justify-content:center;
+  }
+  .icon-eye-btn:hover{background:var(--surface-muted); color:var(--ink); border-color:var(--ink-faint);}
+  .icon-eye-dot{display:inline-block; width:8px; height:8px; border-radius:50%; background:currentColor;}
+
+  /* ---------- Toast de confirmação (sucesso ao enviar report/inovação) ---------- */
+  .page-toast{
+    position:fixed; bottom:24px; right:24px; z-index:2000; max-width:360px;
+    background:var(--st-done-soft); color:var(--st-done); border:1px solid var(--st-done);
+    box-shadow:var(--shadow); border-radius:10px; padding:14px 18px; font-size:13px; font-weight:600;
+    animation:toast-in .2s ease;
+  }
+  .page-toast[hidden]{display:none;}
+  @keyframes toast-in{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+  .tools-table td.col-eye{width:1%; text-align:right;}
 </style>
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Exo+2:wght@400;500;600;700&family=Roboto+Mono:wght@400;500;600&display=swap">
 
+<div class="site-nav">
+  <div class="site-nav-inner">
+    <div class="site-nav-brand">
+      <span class="site-nav-mark" aria-hidden="true"></span>
+      <span class="site-nav-word">DUX <b>·</b> Cockpit</span>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" data-page="projects" type="button">Painel de Projetos</button>
+      <button class="tab-btn" data-page="tools" type="button">Levantamento de Ferramentas</button>
+    </div>
+  </div>
+</div>
 
-</head>
-<body>
 <div class="topbar">
   <div class="brand">
     <div class="eyebrow">DUX · Operações de Produto</div>
     <h1>Cockpit de Projetos</h1>
-    <div class="subline">Visão semanal do que está em execução, em QA e no que foi para produção — direto das raias do Linear. Use na reunião de fechamento de semana.</div>
+    <div class="subline">Espelho do que está rolando no Linear — atualizado a cada reprocessamento. Use na reunião de fechamento de semana.</div>
   </div>
+</div>
+
+<div class="page" id="page-projects">
+
+<div class="section-head">
+  <h2>Principais Projetos</h2>
   <div class="weekbox">
     <div>
       <div class="label">Semana</div>
-      <div class="value" id="weekValue">14 — 18 SET 2026</div>
+      <div class="value" id="weekValue">28 SET — 02 OUT 2026</div>
     </div>
     <div class="weeknav">
       <button id="prevWeek" title="Semana anterior" aria-label="Semana anterior">‹</button>
@@ -353,32 +658,22 @@
 
     <div class="milestone">
       <div class="milestone-head"><span>🎯 Marco · Abertura da Primeira Conta</span><span class="date">Sem meta definida</span></div>
-      <div class="milestone-bar"><!-- LIVE:anti-banking:milestone-bar:start -->
-<div style="width:0%"></div>
-<!-- LIVE:anti-banking:milestone-bar:end --></div>
-      <div class="milestone-count"><!-- LIVE:anti-banking:milestone-count:start -->
-0% concluído
-<!-- LIVE:anti-banking:milestone-count:end --></div>
+      <div class="milestone-bar"><!-- LIVE:anti-banking:milestone-bar:start --><div style="width:0%"></div><!-- LIVE:anti-banking:milestone-bar:end --></div>
+      <div class="milestone-count"><!-- LIVE:anti-banking:milestone-count:start -->0% concluído (1 issue no marco)<!-- LIVE:anti-banking:milestone-count:end --></div>
     </div>
 
     <div class="board">
       <div class="col progress">
         <div class="col-head"><span class="dot" style="background:var(--st-progress)"></span>Em execução</div>
-        <!-- LIVE:anti-banking:board-progress:start -->
-<div class="empty">Nenhuma task em execução</div>
-<!-- LIVE:anti-banking:board-progress:end -->
+        <!-- LIVE:anti-banking:board-progress:start --><div class="empty">Nenhuma task em execução</div><!-- LIVE:anti-banking:board-progress:end -->
       </div>
       <div class="col qa">
         <div class="col-head"><span class="dot" style="background:var(--st-qa)"></span>QA</div>
-        <!-- LIVE:anti-banking:board-qa:start -->
-<div class="empty">Nenhuma task em QA</div>
-<!-- LIVE:anti-banking:board-qa:end -->
+        <!-- LIVE:anti-banking:board-qa:start --><div class="empty">Nenhuma task em QA</div><!-- LIVE:anti-banking:board-qa:end -->
       </div>
       <div class="col done">
         <div class="col-head"><span class="dot" style="background:var(--st-done)"></span>Produção (mais recente)</div>
-        <!-- LIVE:anti-banking:board-done:start -->
-<div class="task"><span class="id mono">DUX-454</span><span>Ajustar ícone do aplicativo<span class="who">Lucas Henning</span></span></div>
-<!-- LIVE:anti-banking:board-done:end -->
+        <!-- LIVE:anti-banking:board-done:start --><div class="task"><span class="id mono">DUX-454</span><span class="title">Ajustar ícone do aplicativo</span><span class="who">Lucas Henning · 18/09</span></div><!-- LIVE:anti-banking:board-done:end -->
       </div>
     </div>
 
@@ -390,28 +685,41 @@
     <div class="metrics-head">Principais métricas</div>
     <div class="distro" title="Distribuição das tasks abertas por etapa">
       <!-- LIVE:anti-banking:distro-bars:start -->
-<div style="width:42.9%"></div>
-<div style="width:28.6%"></div>
-<div style="width:14.3%"></div>
-<div style="width:14.3%"></div>
-<!-- LIVE:anti-banking:distro-bars:end -->
+      <div style="width:40.9%; background:var(--ink-faint)"></div>
+      <div style="width:27.3%; background:var(--ink-soft)"></div>
+      <div style="width:13.6%; background:var(--st-priorized)"></div>
+      <div style="width:13.6%; background:var(--st-progress-soft); outline:1px solid var(--ink-faint)"></div>
+      <div style="width:4.5%; background:var(--st-done)"></div>
+      <!-- LIVE:anti-banking:distro-bars:end -->
     </div>
     <div class="distro-legend">
       <!-- LIVE:anti-banking:distro-legend:start -->
-<span><span class="dot"></span>Backlog · 9</span>
-<span><span class="dot"></span>Product Refinement · 6</span>
-<span><span class="dot"></span>Priorized · 3</span>
-<span><span class="dot"></span>Ready To Dev · 3</span>
-<!-- LIVE:anti-banking:distro-legend:end -->
+      <span><span class="dot" style="background:var(--ink-faint)"></span>Backlog · 9</span>
+      <span><span class="dot" style="background:var(--ink-soft)"></span>Refinamento · 6</span>
+      <span><span class="dot" style="background:var(--st-priorized)"></span>Priorizado · 3</span>
+      <span><span class="dot" style="background:var(--st-progress-soft);outline:1px solid var(--ink-faint)"></span>Pronto p/ dev · 3</span>
+      <span><span class="dot" style="background:var(--st-done)"></span>Prod. (semana) · 1</span>
+      <!-- LIVE:anti-banking:distro-legend:end -->
     </div>
     <div class="areas">
       <div class="areas-head">Áreas envolvidas</div>
       <div class="area-chips">
         <!-- LIVE:anti-banking:areas:start -->
-<span class="chip mkt">Marketing · 0</span>
-<span class="chip fin">Financeiro · 0</span>
-<span class="chip other">Outros · 22</span>
-<!-- LIVE:anti-banking:areas:end -->
+        <span class="chip mkt">Marketing · 0</span>
+        <span class="chip fin">Financeiro · 0</span>
+        <span class="chip other">Outros · 22</span>
+        <!-- LIVE:anti-banking:areas:end -->
+      </div>
+    </div>
+    <div class="types">
+      <div class="types-head">Tipo de task</div>
+      <div class="type-chips">
+        <!-- LIVE:anti-banking:types:start -->
+        <span class="tchip bug">Bug · 5</span>
+        <span class="tchip melhoria">Melhoria · 2</span>
+        <span class="tchip feature">Nova Funcionalidade · 11</span>
+        <span class="tchip outros">Outros · 4</span>
+        <!-- LIVE:anti-banking:types:end -->
       </div>
     </div>
     <div class="kpis">
@@ -469,33 +777,27 @@
 
     <div class="milestone">
       <div class="milestone-head"><span>🎯 Marco · Piloto Risco Sacado</span><span class="date">Meta 28/09</span></div>
-      <div class="milestone-bar"><!-- LIVE:anti-sacado:milestone-bar:start -->
-<div style="width:4412%"></div>
-<!-- LIVE:anti-sacado:milestone-bar:end --></div>
-      <div class="milestone-count"><!-- LIVE:anti-sacado:milestone-count:start -->
-4412% concluído
-<!-- LIVE:anti-sacado:milestone-count:end --></div>
+      <div class="milestone-bar"><!-- LIVE:anti-sacado:milestone-bar:start --><div style="width:33%"></div><!-- LIVE:anti-sacado:milestone-bar:end --></div>
+      <div class="milestone-count"><!-- LIVE:anti-sacado:milestone-count:start -->33% concluído (13 issues no marco)<!-- LIVE:anti-sacado:milestone-count:end --></div>
     </div>
 
     <div class="board">
       <div class="col progress">
         <div class="col-head"><span class="dot" style="background:var(--st-progress)"></span>Em execução</div>
         <!-- LIVE:anti-sacado:board-progress:start -->
-<div class="task"><span class="id mono">DUX-499</span><span>Atualização do Figma com a jornada mais recente<span class="who">Lucas Henning</span></span></div>
-<div class="task"><span class="id mono">DUX-465</span><span>Separar ambientes de produção e QA/desenvolvimento<span class="who">Guilherme Zaidan</span></span></div>
-<!-- LIVE:anti-sacado:board-progress:end -->
+        <div class="task"><span class="id mono">DUX-465</span><span class="title">Separar ambientes de produção e QA/desenvolvimento</span><span class="who">Zaidan · em andamento</span></div>
+        <!-- LIVE:anti-sacado:board-progress:end -->
       </div>
       <div class="col qa">
         <div class="col-head"><span class="dot" style="background:var(--st-qa)"></span>QA</div>
         <!-- LIVE:anti-sacado:board-qa:start -->
-<div class="task"><span class="id mono">DUX-464</span><span>Ajustar o fluxo de cadastro para ser feito em duas etapas<span class="who">Guilherme Zaidan</span></span></div>
-<!-- LIVE:anti-sacado:board-qa:end -->
+        <div class="task"><span class="id mono">DUX-463</span><span class="title">Implementação da régua de comunicação transacional - Email (Risco Sacado)</span><span class="who">Zaidan · em QA</span></div>
+        <div class="task"><span class="id mono">DUX-464</span><span class="title">Ajustar o fluxo de cadastro para ser feito em duas etapas</span><span class="who">Zaidan · em QA</span></div>
+        <!-- LIVE:anti-sacado:board-qa:end -->
       </div>
       <div class="col done">
         <div class="col-head"><span class="dot" style="background:var(--st-done)"></span>Produção (mais recente)</div>
-        <!-- LIVE:anti-sacado:board-done:start -->
-<div class="task"><span class="id mono">DUX-559</span><span>Criar visão do parceiro controle<span class="who">Guilherme Zaidan</span></span></div>
-<!-- LIVE:anti-sacado:board-done:end -->
+        <!-- LIVE:anti-sacado:board-done:start --><div class="task"><span class="id mono">DUX-505</span><span class="title">Definir prazo de assinatura do contrato - D4Sign</span><span class="who">Lucas Henning · 23/09</span></div><!-- LIVE:anti-sacado:board-done:end -->
       </div>
     </div>
 
@@ -507,32 +809,46 @@
     <div class="metrics-head">Principais métricas</div>
     <div class="distro" title="Distribuição das tasks abertas por etapa">
       <!-- LIVE:anti-sacado:distro-bars:start -->
-<div style="width:10.0%"></div>
-<div style="width:35.0%"></div>
-<div style="width:10.0%"></div>
-<div style="width:10.0%"></div>
-<div style="width:15.0%"></div>
-<div style="width:20.0%"></div>
-<!-- LIVE:anti-sacado:distro-bars:end -->
+      <div style="width:6.7%; background:var(--ink-faint)"></div>
+      <div style="width:13.3%; background:var(--ink-soft)"></div>
+      <div style="width:13.3%; background:var(--st-priorized)"></div>
+      <div style="width:20%; background:var(--st-progress-soft); outline:1px solid var(--ink-faint)"></div>
+      <div style="width:6.7%; background:var(--st-progress)"></div>
+      <div style="width:13.3%; background:var(--st-qa)"></div>
+      <div style="width:20%; background:var(--st-done)"></div>
+      <div style="width:6.7%; background:var(--st-build)"></div>
+      <!-- LIVE:anti-sacado:distro-bars:end -->
     </div>
     <div class="distro-legend">
       <!-- LIVE:anti-sacado:distro-legend:start -->
-<span><span class="dot"></span>In Progress · 2</span>
-<span><span class="dot"></span>Backlog · 7</span>
-<span><span class="dot"></span>Product Refinement · 2</span>
-<span><span class="dot"></span>Priorized · 2</span>
-<span><span class="dot"></span>Ready To Dev · 3</span>
-<span><span class="dot"></span>In Review · 4</span>
-<!-- LIVE:anti-sacado:distro-legend:end -->
+      <span><span class="dot" style="background:var(--ink-faint)"></span>Backlog · 1</span>
+      <span><span class="dot" style="background:var(--ink-soft)"></span>Refinamento · 2</span>
+      <span><span class="dot" style="background:var(--st-priorized)"></span>Priorizado · 2</span>
+      <span><span class="dot" style="background:var(--st-progress-soft);outline:1px solid var(--ink-faint)"></span>Pronto p/ dev · 3</span>
+      <span><span class="dot" style="background:var(--st-progress)"></span>Em execução · 1</span>
+      <span><span class="dot" style="background:var(--st-qa)"></span>QA · 2</span>
+      <span><span class="dot" style="background:var(--st-done)"></span>Produção · 3</span>
+      <span><span class="dot" style="background:var(--st-build)"></span>Cancelado · 1</span>
+      <!-- LIVE:anti-sacado:distro-legend:end -->
     </div>
     <div class="areas">
       <div class="areas-head">Áreas envolvidas</div>
       <div class="area-chips">
         <!-- LIVE:anti-sacado:areas:start -->
-<span class="chip mkt">Marketing · 0</span>
-<span class="chip fin">Financeiro · 0</span>
-<span class="chip other">Outros · 28</span>
-<!-- LIVE:anti-sacado:areas:end -->
+        <span class="chip mkt">Marketing · 0</span>
+        <span class="chip fin">Financeiro · 0</span>
+        <span class="chip other">Outros · 15</span>
+        <!-- LIVE:anti-sacado:areas:end -->
+      </div>
+    </div>
+    <div class="types">
+      <div class="types-head">Tipo de task</div>
+      <div class="type-chips">
+        <!-- LIVE:anti-sacado:types:start -->
+        <span class="tchip melhoria">Melhoria · 2</span>
+        <span class="tchip feature">Nova Funcionalidade · 10</span>
+        <span class="tchip outros">Outros · 3</span>
+        <!-- LIVE:anti-sacado:types:end -->
       </div>
     </div>
     <div class="kpis">
@@ -567,33 +883,25 @@
 
     <div class="milestone">
       <div class="milestone-head"><span>🎯 Marco · Liberação V3</span><span class="date">Sem meta definida</span></div>
-      <div class="milestone-bar"><!-- LIVE:decentral:milestone-bar:start -->
-<div style="width:250%"></div>
-<!-- LIVE:decentral:milestone-bar:end --></div>
-      <div class="milestone-count"><!-- LIVE:decentral:milestone-count:start -->
-250% concluído
-<!-- LIVE:decentral:milestone-count:end --></div>
+      <div class="milestone-bar"><!-- LIVE:decentral:milestone-bar:start --><div style="width:3%"></div><!-- LIVE:decentral:milestone-bar:end --></div>
+      <div class="milestone-count"><!-- LIVE:decentral:milestone-count:start -->3% concluído (20 issues no marco)<!-- LIVE:decentral:milestone-count:end --></div>
     </div>
 
     <div class="board">
       <div class="col progress">
         <div class="col-head"><span class="dot" style="background:var(--st-progress)"></span>Em execução</div>
         <!-- LIVE:decentral:board-progress:start -->
-<div class="task"><span class="id mono">DUX-509</span><span>Script de migração legada + ajustes na aplicação<span class="who">Hyago Bitencourt | DUX</span></span></div>
-<div class="task"><span class="id mono">DUX-506</span><span>Estimativa de esforço da migração legada (v2 → v3)<span class="who">Hyago Bitencourt | DUX</span></span></div>
-<!-- LIVE:decentral:board-progress:end -->
+        <div class="task"><span class="id mono">DUX-506</span><span class="title">Estimativa de esforço da migração legada (v2 → v3)</span><span class="who">Hyago · em andamento</span></div>
+        <div class="task"><span class="id mono">DUX-509</span><span class="title">Script de migração legada + ajustes na aplicação</span><span class="who">Hyago · em andamento</span></div>
+        <!-- LIVE:decentral:board-progress:end -->
       </div>
       <div class="col qa">
         <div class="col-head"><span class="dot" style="background:var(--st-qa)"></span>QA</div>
-        <!-- LIVE:decentral:board-qa:start -->
-<div class="empty">Nenhuma task em QA</div>
-<!-- LIVE:decentral:board-qa:end -->
+        <!-- LIVE:decentral:board-qa:start --><div class="empty">Nenhuma task em QA</div><!-- LIVE:decentral:board-qa:end -->
       </div>
       <div class="col done">
         <div class="col-head"><span class="dot" style="background:var(--st-done)"></span>Produção (mais recente)</div>
-        <!-- LIVE:decentral:board-done:start -->
-<div class="empty">Nenhuma entrega em produção ainda</div>
-<!-- LIVE:decentral:board-done:end -->
+        <!-- LIVE:decentral:board-done:start --><div class="empty">Nenhuma entrega em produção ainda</div><!-- LIVE:decentral:board-done:end -->
       </div>
     </div>
 
@@ -607,30 +915,41 @@
     <div class="metrics-head">Principais métricas</div>
     <div class="distro" title="Distribuição das tasks abertas por etapa">
       <!-- LIVE:decentral:distro-bars:start -->
-<div style="width:8.3%"></div>
-<div style="width:54.2%"></div>
-<div style="width:8.3%"></div>
-<div style="width:20.8%"></div>
-<div style="width:8.3%"></div>
-<!-- LIVE:decentral:distro-bars:end -->
+      <div style="width:54.2%; background:var(--ink-faint)"></div>
+      <div style="width:8.3%; background:var(--ink-soft)"></div>
+      <div style="width:20.8%; background:var(--st-priorized)"></div>
+      <div style="width:8.3%; background:var(--st-progress-soft); outline:1px solid var(--ink-faint)"></div>
+      <div style="width:8.3%; background:var(--st-progress)"></div>
+      <!-- LIVE:decentral:distro-bars:end -->
     </div>
     <div class="distro-legend">
       <!-- LIVE:decentral:distro-legend:start -->
-<span><span class="dot"></span>In Progress · 2</span>
-<span><span class="dot"></span>Backlog · 13</span>
-<span><span class="dot"></span>Product Refinement · 2</span>
-<span><span class="dot"></span>Priorized · 5</span>
-<span><span class="dot"></span>Ready To Dev · 2</span>
-<!-- LIVE:decentral:distro-legend:end -->
+      <span><span class="dot" style="background:var(--ink-faint)"></span>Backlog · 13</span>
+      <span><span class="dot" style="background:var(--ink-soft)"></span>Refinamento · 2</span>
+      <span><span class="dot" style="background:var(--st-priorized)"></span>Priorizado · 5</span>
+      <span><span class="dot" style="background:var(--st-progress-soft);outline:1px solid var(--ink-faint)"></span>Pronto p/ dev · 2</span>
+      <span><span class="dot" style="background:var(--st-progress)"></span>Em execução · 2</span>
+      <!-- LIVE:decentral:distro-legend:end -->
     </div>
     <div class="areas">
       <div class="areas-head">Áreas envolvidas</div>
       <div class="area-chips">
         <!-- LIVE:decentral:areas:start -->
-<span class="chip mkt">Marketing · 4</span>
-<span class="chip fin">Financeiro · 4</span>
-<span class="chip other">Outros · 16</span>
-<!-- LIVE:decentral:areas:end -->
+        <span class="chip mkt">Marketing · 4</span>
+        <span class="chip fin">Financeiro · 4</span>
+        <span class="chip other">Outros · 16</span>
+        <!-- LIVE:decentral:areas:end -->
+      </div>
+    </div>
+    <div class="types">
+      <div class="types-head">Tipo de task</div>
+      <div class="type-chips">
+        <!-- LIVE:decentral:types:start -->
+        <span class="tchip bug">Bug · 2</span>
+        <span class="tchip melhoria">Melhoria · 2</span>
+        <span class="tchip feature">Nova Funcionalidade · 3</span>
+        <span class="tchip outros">Outros · 17</span>
+        <!-- LIVE:decentral:types:end -->
       </div>
     </div>
     <div class="kpis">
@@ -652,16 +971,446 @@
   <div class="closing-body" id="closingContent" hidden></div>
 </div>
 
+</div>
+
+<div class="page" id="page-tools" hidden>
+
+  <div class="subline" style="margin-bottom:16px;">Panorama do ferramental interno do Grupo DUX — o que cada ferramenta faz, quem usa, o status atual e se já está conectada ao Core. Atualizado manualmente pelo Lucas (última atualização da fonte: 24/set/2026).</div>
+
+  <div class="tools-actions">
+    <button type="button" class="tools-action-btn primary" id="openReportToolBtn">+ Reportar Ferramenta</button>
+    <button type="button" class="tools-action-btn" id="openReportInnovationBtn">💡 Reportar Inovação</button>
+  </div>
+
+  <div class="tools-group">
+    <div class="tools-group-head">
+      <h2>Portal DUX</h2>
+      <span class="tools-group-sub">demands-pipeline-tool.vercel.app/admin</span>
+    </div>
+    <div class="tools-table-wrap">
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Ferramenta</th><th>O que faz</th><th>Owner</th><th>Quem usa</th>
+            <th>Status</th><th>Ambiente</th><th>Próximos passos</th><th>Core</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-name">Solicitações</td>
+            <td class="tool-desc">A fila das demandas de antecipação — a entrada comercial da operação.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Comercial</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Absorver o volume do Risco Sacado quando o portal do cliente entrar.</td>
+            <td><span class="core-dot sim"><span class="dot"></span>Sim</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Cadastros</td>
+            <td class="tool-desc">Base de cedentes, sacados e contrapartes da operação.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Manter a base limpa para receber a migração do histórico.</td>
+            <td><span class="core-dot sim"><span class="dot"></span>Sim</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Onboarding</td>
+            <td class="tool-desc">Entrada do cedente: documentos, checagens e habilitação.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Conectar ao Core, para o cedente nascer já na base única.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Análise de Crédito</td>
+            <td class="tool-desc">Lê os documentos por IA, decide limite, risco e tipo, e devolve o parecer.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Crédito</td>
+            <td><span class="status-pill construcao">Em construção</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Unificar a fonte das regras; alçada por operador; rating DUX em produção.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Simulador de Taxas</td>
+            <td class="tool-desc">Taxa, prazo e líquido para negociar com o cedente antes da proposta.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Comercial</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Embutir as regras fixas — o piso não depende de quem simula.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Gerador de Documentos</td>
+            <td class="tool-desc">Contratos, termos e aditivos a partir de modelo, já preenchidos.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Revisar os modelos e as travas de pagamento; gerar também a proposta.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Aceites &amp; Anuências</td>
+            <td class="tool-desc">Envia e acompanha o aceite do sacado e o termo de anuência (o endosso).</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill pausado">Pausado</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Retomar e pôr em uso pleno; conectar ao Core — o aceite vira dado.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Relatórios</td>
+            <td class="tool-desc">Extração e leitura da carteira, para dentro e para fora.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill pausado">Pausado</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Retomar com padrão único — hoje cada leitura sai de um lugar.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Operações</td>
+            <td class="tool-desc">Acompanhamento das operações em andamento, já formalizadas.</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill pausado">Pausado</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Retomar a construção — o acompanhamento vive fora do Portal.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tools-group">
+    <div class="tools-group-head">
+      <h2>Fora do Portal</h2>
+      <span class="tools-group-sub">ferramentas próprias, cada uma no seu endereço</span>
+    </div>
+    <div class="tools-table-wrap">
+      <table class="tools-table">
+        <thead>
+          <tr>
+            <th>Ferramenta</th><th>O que faz</th><th>Owner</th><th>Quem usa</th>
+            <th>Status</th><th>Ambiente</th><th>Próximos passos</th><th>Core</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tool-name">Cobrança</td>
+            <td class="tool-desc">Acompanhamento e recuperação dos títulos vencidos.</td>
+            <td class="tool-owner">Felipe</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Trazer pra dentro do Portal, com controle de casos judiciais. Meta: default &lt; 1%.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Portal do cliente<br><span class="tool-who" style="display:block;">na mão do Felipe</span></td>
+            <td class="tool-desc">A ponta do cedente, com o simulador de taxas dentro dos relatórios.</td>
+            <td class="tool-owner">Felipe</td>
+            <td class="tool-who">Cliente</td>
+            <td><span class="status-pill incipiente">Incipiente</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Tem as telas, ainda não está pronta — próximo passo a definir com o Felipe.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">Controle de Liquidez</td>
+            <td class="tool-desc">Rendimento de quem emprestou liquidez e comissão de quem trouxe negócio.</td>
+            <td class="tool-owner">Lucas · Felipe</td>
+            <td class="tool-who">Tesouraria<br><span style="font-size:10.5px;">Lucas · Tibúrcio · João Pena</span></td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Fechar as regras de comissionamento pendentes e pôr atrás do login da casa.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">CNAB<br><span class="tool-who" style="display:block;">interno</span></td>
+            <td class="tool-desc">Remessa e retorno com os veículos de liquidez (LIQI e ATLAS).</td>
+            <td class="tool-owner">Zaidan</td>
+            <td class="tool-who">Operações financeiras</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Escalar volume e entrar com pagamento em lote no Itaú.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">App do originador</td>
+            <td class="tool-desc">Onde o cliente pede a antecipação e recebe o dinheiro.</td>
+            <td class="tool-owner">Felipe</td>
+            <td class="tool-who">Cliente</td>
+            <td><span class="status-pill prototipo">Protótipo</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Sair do desenho e entrar em construção.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+          <tr>
+            <td class="tool-name">People App</td>
+            <td class="tool-desc">Plataforma de RH da casa: recrutamento, pessoas, handoff e férias.</td>
+            <td class="tool-owner">Lucas</td>
+            <td class="tool-who">RH</td>
+            <td><span class="status-pill uso">Em uso</span></td>
+            <td><span class="env-pill">Local</span></td>
+            <td class="tool-next">Não toca a esteira — segue independente do Core.</td>
+            <td><span class="core-dot nao"><span class="dot"></span>Não</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="tools-group" id="reportedToolsGroup">
+    <div class="tools-group-head">
+      <h2>Ferramentas Reportadas</h2>
+      <span class="tools-group-sub">preenchido pela equipe via "Reportar Ferramenta" · agrupado por área</span>
+    </div>
+    <div id="reportedToolsBody">
+      <div class="reported-empty">Carregando reports…</div>
+    </div>
+  </div>
+
+  <div class="tools-group" id="reportedInnovationsGroup">
+    <div class="tools-group-head">
+      <h2>Inovações Reportadas</h2>
+      <span class="tools-group-sub">preenchido pela equipe via "Reportar Inovação" · mais recentes primeiro</span>
+    </div>
+    <div id="reportedInnovationsBody">
+      <div class="reported-empty">Carregando…</div>
+    </div>
+  </div>
+
+  <div class="core-note">
+    <h3>🔗 O Core — não é uma ferramenta, é o agregador</h3>
+    <p>É onde o dado das ferramentas se junta e vira base única da operação. Hoje só o Portal alimenta o Core, e só por duas frentes: <b>solicitações</b> (o lado comercial) e <b>cadastro</b>. O endosso ainda não entra.</p>
+    <div class="core-note-grid">
+      <div><span class="k">Estado atual</span><p>Recebe só o que nasceu depois do Portal. Tudo que veio antes está fora, sem migração e sem estrutura contínua que ligue um período ao outro.</p></div>
+      <div><span class="k">O que falta</span><p>A migração das informações anteriores ao Portal. Sem ela, qualquer leitura histórica continua saindo de fora do Core.</p></div>
+      <div><span class="k">Depois disso</span><p>Ligar as ferramentas que ainda estão de fora, começando pela camada do endosso — que já é dado estruturado dentro do Portal.</p></div>
+    </div>
+  </div>
+
+  <div class="legend" style="margin-top:16px;">
+    <span><span class="status-pill uso">Em uso</span></span>
+    <span><span class="status-pill construcao">Em construção</span></span>
+    <span><span class="status-pill pausado">Pausado</span></span>
+    <span><span class="status-pill incipiente">Incipiente</span></span>
+    <span><span class="status-pill prototipo">Protótipo</span></span>
+    <span><span class="core-dot sim"><span class="dot"></span>Sim</span> / <span class="core-dot nao"><span class="dot"></span>Não</span> — conectada ao Core</span>
+    <span><span class="env-pill">Local</span> · Homologação · Produção — onde a ferramenta roda hoje</span>
+  </div>
+
+</div>
+
+<div class="modal-overlay" id="reportToolModalOverlay" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Reportar Ferramenta</h2>
+      <button type="button" class="modal-close" data-close-modal="reportToolModalOverlay" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body">
+    <div class="report-intro">
+      <p>Usa uma ferramenta ou desenvolveu alguma internamente? Conta pra gente aqui — as respostas alimentam o "Levantamento de Ferramentas" automaticamente, agrupadas por área. Se você usa mais de uma ferramenta, envie o formulário de novo para cada uma.</p>
+    </div>
+
+    <div class="form-banner" id="reportBanner"></div>
+
+    <form id="reportForm">
+      <div class="field">
+        <label for="repNome">1. Nome da ferramenta <span class="required-mark">*</span></label>
+        <input type="text" id="repNome" required>
+      </div>
+
+      <div class="field">
+        <label for="repDesenvolvido">2. Quem desenvolveu <span class="required-mark">*</span></label>
+        <input type="text" id="repDesenvolvido" required placeholder="Pessoa, time interno ou fornecedor externo">
+      </div>
+
+      <div class="field">
+        <label for="repResponsavel">3. Quem é o responsável hoje (owner) <span class="required-mark">*</span></label>
+        <input type="text" id="repResponsavel" required>
+      </div>
+
+      <div class="field">
+        <label for="repDescritivo">4. Descritivo rápido da aplicação <span class="required-mark">*</span></label>
+        <textarea id="repDescritivo" required placeholder="Função ou funções principais"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="repArea">5. Em qual área essa ferramenta é usada <span class="required-mark">*</span> <span class="hint">(segure Ctrl/Cmd pra selecionar mais de uma)</span></label>
+        <select id="repArea" multiple required size="7">
+          <option>Marketing</option>
+          <option>Jurídico</option>
+          <option>Financeiro</option>
+          <option>Comercial</option>
+          <option>Operacional</option>
+          <option>Desenvolvimento</option>
+          <option>Outro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>6. Em qual ambiente ela está disponível <span class="required-mark">*</span></label>
+        <input type="hidden" id="repAmbiente">
+        <div class="toggle-group" data-toggle-for="repAmbiente">
+          <button type="button" class="toggle-opt" data-value="Local">Local</button>
+          <button type="button" class="toggle-opt" data-value="Produção">Produção</button>
+        </div>
+        <div class="field-conditional" id="repLinkWrap" hidden>
+          <label for="repLink">Qual o link de acesso?</label>
+          <input type="url" id="repLink" placeholder="https://…">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>7. Essa ferramenta está disponível no GitHub? <span class="required-mark">*</span></label>
+        <input type="hidden" id="repGithub">
+        <div class="toggle-group" data-toggle-for="repGithub">
+          <button type="button" class="toggle-opt" data-value="Sim">Sim</button>
+          <button type="button" class="toggle-opt" data-value="Não">Não</button>
+        </div>
+        <div class="field-conditional" id="repGithubLinkWrap" hidden>
+          <label for="repGithubLink">Qual o link do repositório?</label>
+          <input type="url" id="repGithubLink" placeholder="https://github.com/…">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>8. Como é feita a atualização dos dados dessa ferramenta <span class="required-mark">*</span></label>
+        <input type="hidden" id="repAtualizacao">
+        <div class="toggle-group" data-toggle-for="repAtualizacao">
+          <button type="button" class="toggle-opt" data-value="Manual">Manual</button>
+          <button type="button" class="toggle-opt" data-value="Integrada">Integrada a um banco de dados</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>9. Você acha importante essa ferramenta estar disponível para outras áreas ou pessoas utilizarem? <span class="required-mark">*</span></label>
+        <input type="hidden" id="repDisponibilizar">
+        <div class="toggle-group" data-toggle-for="repDisponibilizar">
+          <button type="button" class="toggle-opt" data-value="Sim">Sim</button>
+          <button type="button" class="toggle-opt" data-value="Não">Não</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="repData">10. Data da última atualização ou melhoria feita nela <span class="required-mark">*</span></label>
+        <input type="date" id="repData" required>
+      </div>
+
+      <div class="field">
+        <label for="repFrequencia">11. Qual a frequência de uso no seu dia a dia? <span class="required-mark">*</span></label>
+        <select id="repFrequencia" required>
+          <option value="" disabled selected>Selecione</option>
+          <option>Pouco (cerca de 1x por mês)</option>
+          <option>Médio (cerca de 1x por semana)</option>
+          <option>Muito (quase diariamente)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="repPrints">12. Prints da ferramenta (tela principal + informações secundárias) <span class="hint">(opcional)</span></label>
+        <input type="file" id="repPrints" accept="image/png,image/jpeg,image/gif,image/webp" multiple>
+        <span class="hint">PNG, JPEG, GIF ou WEBP, até 20 MB cada — selecione quantos quiser de uma vez (tela principal + telas secundárias).</span>
+      </div>
+
+      <div class="field">
+        <label for="repVideo">13. Vídeo rápido demonstrativo da navegação (opcional)</label>
+        <input type="file" id="repVideo" accept="video/mp4,video/webm">
+        <span class="hint">Apenas MP4 ou WEBM, até 20 MB (limite da plataforma — não dá pra subir arquivo maior que isso, nem em outro formato como .MOV/QuickTime). (Dica: uma gravação simples da tela do computador, mostrando a navegação básica na ferramenta, já ajuda bastante.) Se o seu vídeo for maior que 20 MB ou estiver em outro formato (ex.: .MOV), cole um link dele (Loom, Google Drive, YouTube não-listado) no campo abaixo em vez de subir o arquivo.</span>
+        <input type="url" id="repVideoLink" placeholder="https://…" style="margin-top:8px;">
+      </div>
+
+      <button type="submit" class="form-submit" id="reportSubmitBtn">Enviar report</button>
+    </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="reportInnovationModalOverlay" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Reportar Inovação</h2>
+      <button type="button" class="modal-close" data-close-modal="reportInnovationModalOverlay" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p class="report-hint">Copie o prompt abaixo e cole numa conversa nova do seu Claude. Ele vai perguntar sua área, depois vai te entrevistar sobre um fluxo de inovação com IA — e no final vai perguntar se você quer reportar mais algum fluxo, repetindo quantas vezes precisar. Só quando você disser que não tem mais nenhum, ele entrega o texto final pra colar aqui embaixo (com todos os fluxos juntos, já separados).</p>
+
+      <div class="form-banner" id="innovationBanner"></div>
+
+      <form id="innovationForm">
+        <div class="field">
+          <label>1. Copie este prompt</label>
+          <textarea id="innovationPromptBox" class="copy-box" readonly rows="9"></textarea>
+          <button type="button" class="tools-action-btn" id="copyPromptBtn" style="margin-top:8px;">Copiar prompt</button>
+        </div>
+
+        <div class="field">
+          <label for="innovationPaste">2. Cole aqui o texto final que o Claude te devolveu <span class="required-mark">*</span></label>
+          <textarea id="innovationPaste" rows="10" required placeholder="Cole aqui o texto entre as linhas ===== que o Claude te devolveu no final da conversa (pode ter mais de um fluxo dentro)…"></textarea>
+          <span class="hint">Se você reportou mais de um fluxo na mesma conversa, não precisa separar — cole o bloco inteiro de uma vez, cada fluxo já vem identificado dentro do texto.</span>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button type="submit" class="form-submit" id="innovationSubmitBtn">Submeter</button>
+          <button type="button" class="tools-action-btn" data-close-modal="reportInnovationModalOverlay">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="detailModalOverlay" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <h2 id="detailModalTitle">Detalhes</h2>
+      <button type="button" class="modal-close" data-close-modal="detailModalOverlay" aria-label="Fechar">&times;</button>
+    </div>
+    <div class="modal-body" id="detailModalBody"></div>
+  </div>
+</div>
+
+<div class="page-toast" id="pageToast" hidden></div>
+
 <div class="footer">
-  <span>Fonte: raias do Linear (workspace DUX) · board ao vivo (webhook) + fechamento semanal (sexta 18h).</span>
-  <span>v2 — painel ao vivo + histórico de fechamentos.</span>
+  <span>Fonte: raias do Linear (workspace DUX), atualizado a cada reprocessamento · fechamento semanal (sexta 18h) · levantamento de ferramentas (manual).</span>
+  <span>v4 — layout hierárquico (2 cards/linha) + Principais Projetos + levantamento de ferramentas.</span>
 </div>
 
 <!-- Histórico de fechamentos semanais — cada objeto é uma semana já fechada (congelada).
      Preenchido automaticamente pelo job de fechamento de sexta (18h). Formato e regras
      documentados no doc do projeto Claude "Cockpit de Projetos - DUX". -->
 <script id="weekHistoryData" type="application/json">
-[]
+[
+  {
+    "label": "21 — 25 SET 2026",
+    "open": false,
+    "report": {
+      "burndownSvg": "<svg viewBox='0 0 320 160' width='100%' height='160' role='img' aria-label='Itens em aberto por dia, 21 a 25 de setembro'><line x1='28' y1='142' x2='312' y2='142' stroke='var(--line-strong)' stroke-width='1'/><line x1='28' y1='88.4' x2='312' y2='88.4' stroke='var(--line)' stroke-width='1' stroke-dasharray='2,3'/><line x1='28' y1='34.8' x2='312' y2='34.8' stroke='var(--line)' stroke-width='1' stroke-dasharray='2,3'/><text x='24' y='145' font-size='8' fill='var(--ink-faint)' text-anchor='end'>0</text><text x='24' y='91' font-size='8' fill='var(--ink-faint)' text-anchor='end'>10</text><text x='24' y='38' font-size='8' fill='var(--ink-faint)' text-anchor='end'>20</text><polyline points='28,35 99,35 170,29.4 241,29.4 312,29.4' fill='none' stroke='var(--st-progress)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><polyline points='28,115.2 99,83.0 170,99.1 241,99.1 312,93.8' fill='none' stroke='var(--st-priorized)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><polyline points='28,136.6 99,88.4 170,34.8 241,24.1 312,13.4' fill='none' stroke='var(--blk-int)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/><text x='28' y='155' font-size='8' fill='var(--ink-faint)' text-anchor='middle'>Seg</text><text x='99' y='155' font-size='8' fill='var(--ink-faint)' text-anchor='middle'>Ter</text><text x='170' y='155' font-size='8' fill='var(--ink-faint)' text-anchor='middle'>Qua</text><text x='241' y='155' font-size='8' fill='var(--ink-faint)' text-anchor='middle'>Qui</text><text x='312' y='155' font-size='8' fill='var(--ink-faint)' text-anchor='middle'>Sex</text></svg><div style='display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:10.5px;color:var(--ink-soft);'><span><span style='display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--st-progress);margin-right:4px;'></span>Anti Banking</span><span><span style='display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--st-priorized);margin-right:4px;'></span>Anti Sacado</span><span><span style='display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blk-int);margin-right:4px;'></span>Decentral</span></div>",
+      "highlights": [
+        "Decentral saiu do zero: o board foi estruturado nesta semana, saltando de 1 para 24 itens abertos — mapeamento inicial de escopo concluído.",
+        "Anti Banking entregou 1 item em produção e manteve o backlog estável (20 → 21 itens abertos ao longo da semana).",
+        "Anti Sacado avançou 2 itens para produção e 2 para QA, reduzindo de 11 (pico de terça) para 9 itens abertos na sexta.",
+        "No total, os 3 projetos fecharam a semana com 54 itens em aberto, ante 26 na segunda-feira."
+      ],
+      "suggestions": [
+        "Decentral está com 17 tasks ainda como \"Outros\" em tipo — priorizar a reclassificação (Bug/Melhoria/Nova Funcionalidade) antes do próximo fechamento.",
+        "Anti Sacado segue sem nenhuma task marcada em Marketing ou Financeiro — validar se a área está sendo preenchida no Linear.",
+        "Começar a semana de 28/09 atacando o backlog do Anti Banking (9 itens ainda sem refinamento)."
+      ]
+    }
+  }
+]
 </script>
 
 <script>
@@ -670,7 +1419,7 @@
     try { history = JSON.parse(document.getElementById('weekHistoryData').textContent || "[]"); } catch(e){ history = []; }
 
     // Semana corrente (em aberto) — atualizada ao vivo pelo webhook até fechar na sexta.
-    var currentWeek = { label: "21 — 25 SET 2026", open: true };
+    var currentWeek = { label: "28 SET — 02 OUT 2026", open: true };
 
     var weeks = history.concat([currentWeek]);
     var idx = weeks.length - 1;
@@ -721,5 +1470,685 @@
   })();
 </script>
 
-</body>
-</html>
+<script>
+  (function(){
+    var tabBtns = Array.prototype.slice.call(document.querySelectorAll('.tab-btn'));
+    var pages = {
+      projects: document.getElementById('page-projects'),
+      tools: document.getElementById('page-tools')
+    };
+    function showPage(key){
+      tabBtns.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-page') === key); });
+      Object.keys(pages).forEach(function(k){ pages[k].hidden = (k !== key); });
+    }
+    tabBtns.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        var key = btn.getAttribute('data-page');
+        showPage(key);
+        // Reflete a aba atual na URL, pra dar pra copiar/compartilhar o link direto (ver setHash no script mais abaixo).
+        if (window.__cockpitSetHash) window.__cockpitSetHash(key === 'tools' ? 'tools' : '');
+      });
+    });
+    // Exposto pro roteamento por hash (#tools, #reportar-ferramenta, #reportar-inovacao), ver script mais abaixo.
+    window.__cockpitShowPage = showPage;
+  })();
+</script>
+
+<!-- Reportar Ferramenta — grava em db/assets do próprio Artifact (capabilities db+assets+user).
+     Documentado no doc do projeto Claude "Cockpit de Projetos - DUX". -->
+<script>
+  (function(){
+    var AREA_ORDER = ["Marketing", "Jurídico", "Financeiro", "Comercial", "Operacional", "Desenvolvimento", "Outro"];
+
+    var dbApi = null, assetsApi = null, userApi = null, downloadsApi = null;
+
+    function $(id){ return document.getElementById(id); }
+
+    var INNOVATION_PROMPT =
+      "Você vai conduzir uma entrevista comigo sobre um ou mais fluxos de inovação com IA que eu uso ou desenvolvi no meu dia a dia de trabalho na DUX. " +
+      "Faça as perguntas de forma natural, em português, uma de cada vez ou em pequenos blocos — não precisa seguir a ordem exata nem usar essas palavras " +
+      "literalmente. Se eu responder de forma incompleta ou pular algum ponto, pergunte de novo de outro jeito até ter uma resposta clara.\n\n" +
+      "Primeiro, antes de falar sobre qualquer fluxo específico, pergunte:\n" +
+      "- Em qual área eu atuo (Marketing, Jurídico, Financeiro, Comercial, Operacional, Desenvolvimento ou Outro).\n" +
+      "Essa resposta vale para todos os fluxos que eu for reportar nesta conversa — não precisa perguntar de novo depois.\n\n" +
+      "Para CADA fluxo de inovação, cubra os pontos abaixo (pode perguntar em blocos, não precisa ser um de cada vez). Não peça um título pro fluxo — " +
+      "o título final quem sugere é você, depois, com base em tudo que eu responder:\n" +
+      "1. Descrição detalhada do fluxo de inovação com IA: o que ele faz de fato, na prática, pra que serve e que problema ou tarefa ele resolve " +
+      "pra mim. Capriche aqui — quanto mais completo, melhor (não precisa ser curto).\n" +
+      "2. Se eu já consegui gerar alguma ferramenta a partir dele.\n" +
+      "3. Se vale outras pessoas da DUX conhecerem esse fluxo.\n" +
+      "4. Quais ferramentas de IA estão envolvidas (ex.: Claude, ChatGPT, geração de imagem, geração de resumo, outras) e como o fluxo funciona na " +
+      "prática, passo a passo, rapidamente.\n" +
+      "5. Com qual frequência eu uso (ex.: semanalmente, mensalmente, diariamente).\n" +
+      "6. Qual o escopo de uso: atividade operacional, atividade manual, otimização de tempo, ou essencial para o meu trabalho.\n" +
+      "7. Se esse fluxo envolve dados sensíveis de clientes.\n\n" +
+      "Depois de cobrir os 7 pontos de um fluxo, pergunte: \"Gostaria de reportar outro fluxo de inovação?\". Se eu disser que sim, repita os 7 pontos " +
+      "acima para o novo fluxo (sem perguntar a área de novo — já ficou registrada). Continue repetindo até eu dizer que não tenho mais nenhum fluxo " +
+      "para reportar.\n\n" +
+      "Só então, depois que eu confirmar que não tenho mais fluxos pra reportar, monte o resumo de TODOS os fluxos que eu descrevi nesta conversa, cada " +
+      "um com suas próprias respostas, e me entregue dentro de um bloco de texto bem delimitado, EXATAMENTE neste formato (um bloco " +
+      "\"--- INOVAÇÃO N ---\" para cada fluxo, na ordem em que eu descrevi). Pra cada fluxo, além do RESUMO completo, preencha também TRÊS campos curtos " +
+      "que serão usados pra montar uma listagem resumida no portal:\n" +
+      "- TÍTULO: você mesmo sugere, com até uma linha — não é algo que eu respondo. Leia minha resposta ao ponto 1 (e ao ponto 4, sobre qual " +
+      "ferramenta de IA está envolvida) e resuma num título curto e direto que já deixe claro do que se trata e qual agente/IA está por trás " +
+      "(ex.: \"Geração de briefings de campanha com Claude\", \"Resumo automático de reuniões via ChatGPT\").\n" +
+      "- DESCRIÇÃO: um resumo mais completo do que o fluxo faz de fato — baseado na resposta ao ponto 1. Pode ter mais de uma frase se precisar pra " +
+      "ficar claro o que a ferramenta realmente faz; só não repita o RESUMO inteiro.\n" +
+      "- FREQUÊNCIA: só a resposta ao ponto 5, curta, ex.: \"Diariamente\".\n" +
+      "- ESCOPO: só a resposta ao ponto 6, usando uma destas quatro palavras ou a mais próxima: Operacional, Manual, Otimização de tempo, ou " +
+      "Essencial.\n\n" +
+      "===== COLE ISTO NO PORTAL DUX =====\n" +
+      "ÁREA: (área que eu informei)\n\n" +
+      "--- INOVAÇÃO 1 ---\n" +
+      "TÍTULO: (título de até uma linha que você sugeriu pro primeiro fluxo, citando o agente/IA envolvido)\n" +
+      "DESCRIÇÃO: (resumo mais completo do que o fluxo faz, baseado no ponto 1)\n" +
+      "FREQUÊNCIA: (resposta curta ao ponto 5)\n" +
+      "ESCOPO: (Operacional, Manual, Otimização de tempo ou Essencial)\n" +
+      "RESUMO:\n" +
+      "(resumo completo em tópicos das respostas aos pontos 1 a 7 desse fluxo)\n\n" +
+      "--- INOVAÇÃO 2 ---\n" +
+      "TÍTULO: (título que você sugeriu pro segundo fluxo, se houver)\n" +
+      "DESCRIÇÃO: (resumo mais completo)\n" +
+      "FREQUÊNCIA: (resposta curta)\n" +
+      "ESCOPO: (Operacional, Manual, Otimização de tempo ou Essencial)\n" +
+      "RESUMO:\n" +
+      "(resumo completo em tópicos)\n\n" +
+      "(repita um bloco \"--- INOVAÇÃO N ---\" para cada fluxo que eu tiver descrito; se eu só descrevi um fluxo, deixe só o bloco \"--- INOVAÇÃO 1 ---\")\n" +
+      "===== FIM =====\n\n" +
+      "E me diga explicitamente, fora do bloco: \"Copie o texto entre as linhas ===== acima (incluindo todos os fluxos) e cole no campo do portal " +
+      "Cockpit DUX, na seção Reportar Inovação.\"";
+    if ($('innovationPromptBox')) $('innovationPromptBox').value = INNOVATION_PROMPT;
+
+    // ---- hash helper (pra URL refletir aba/modal aberto, e poder compartilhar o link direto) ----
+    function setHash(h){
+      if (h) {
+        if (location.hash !== '#' + h) location.hash = h;
+      } else if (location.hash) {
+        if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+        else location.hash = '';
+      }
+    }
+    // Exposto pro script da tab-nav (que roda antes deste no arquivo) poder sincronizar a URL ao trocar de aba.
+    window.__cockpitSetHash = setHash;
+
+    // ---- toast de confirmação (some sozinho) ----
+    function showToast(msg){
+      var el = $('pageToast');
+      if (!el) return;
+      el.textContent = msg;
+      el.hidden = false;
+      clearTimeout(el.__toastTimer);
+      el.__toastTimer = setTimeout(function(){ el.hidden = true; }, 4000);
+    }
+
+    // ---- modal open/close ----
+    function openModal(id){
+      var el = $(id); if (el) el.hidden = false;
+      if (id === 'reportToolModalOverlay') setHash('reportar-ferramenta');
+      if (id === 'reportInnovationModalOverlay') setHash('reportar-inovacao');
+    }
+    function closeModal(id){
+      var el = $(id); if (el) el.hidden = true;
+      if (id === 'reportToolModalOverlay' || id === 'reportInnovationModalOverlay') setHash('tools');
+    }
+    function openDetailModal(title, bodyHtml){
+      $('detailModalTitle').textContent = title;
+      $('detailModalBody').innerHTML = bodyHtml;
+      Array.prototype.slice.call($('detailModalBody').querySelectorAll('.detail-media-img')).forEach(function(media){
+        media.addEventListener('error', function(){
+          media.hidden = true;
+          var missing = media.nextElementSibling;
+          if (missing && missing.classList.contains('detail-media-missing')) missing.hidden = false;
+        });
+      });
+      openModal('detailModalOverlay');
+    }
+    if ($('openReportToolBtn')) $('openReportToolBtn').addEventListener('click', function(){ openModal('reportToolModalOverlay'); });
+    if ($('openReportInnovationBtn')) $('openReportInnovationBtn').addEventListener('click', function(){ openModal('reportInnovationModalOverlay'); });
+    Array.prototype.slice.call(document.querySelectorAll('[data-close-modal]')).forEach(function(btn){
+      btn.addEventListener('click', function(){ closeModal(btn.getAttribute('data-close-modal')); });
+    });
+    Array.prototype.slice.call(document.querySelectorAll('.modal-overlay')).forEach(function(overlay){
+      overlay.addEventListener('click', function(ev){ if (ev.target === overlay) closeModal(overlay.id); });
+    });
+    document.addEventListener('keydown', function(ev){
+      if (ev.key === 'Escape') {
+        Array.prototype.slice.call(document.querySelectorAll('.modal-overlay')).forEach(function(overlay){
+          if (!overlay.hidden) closeModal(overlay.id);
+        });
+      }
+    });
+
+    if ($('copyPromptBtn')) $('copyPromptBtn').addEventListener('click', async function(){
+      var box = $('innovationPromptBox');
+      var ok = false;
+      try {
+        await navigator.clipboard.writeText(box.value);
+        ok = true;
+      } catch(e) {
+        try {
+          box.removeAttribute('readonly');
+          box.focus(); box.select();
+          ok = document.execCommand('copy');
+          box.setAttribute('readonly', 'readonly');
+        } catch(e2) { ok = false; }
+      }
+      var btn = $('copyPromptBtn');
+      var original = 'Copiar prompt';
+      btn.textContent = ok ? 'Copiado!' : 'Não foi possível copiar — selecione manualmente';
+      setTimeout(function(){ btn.textContent = original; }, 1800);
+    });
+
+    // ---- toggle groups (Ambiente / Atualização / Disponibilizar) ----
+    Array.prototype.slice.call(document.querySelectorAll('.toggle-group')).forEach(function(group){
+      var hiddenInput = $(group.getAttribute('data-toggle-for'));
+      Array.prototype.slice.call(group.querySelectorAll('.toggle-opt')).forEach(function(btn){
+        btn.addEventListener('click', function(){
+          Array.prototype.slice.call(group.querySelectorAll('.toggle-opt')).forEach(function(b){ b.classList.remove('selected'); });
+          btn.classList.add('selected');
+          hiddenInput.value = btn.getAttribute('data-value');
+          if (hiddenInput.id === 'repAmbiente') {
+            $('repLinkWrap').hidden = (hiddenInput.value !== 'Produção');
+          }
+          if (hiddenInput.id === 'repGithub') {
+            $('repGithubLinkWrap').hidden = (hiddenInput.value !== 'Sim');
+            if (hiddenInput.value !== 'Sim') $('repGithubLink').value = '';
+          }
+        });
+      });
+    });
+
+    function showBanner(kind, msg){
+      var el = $('reportBanner');
+      el.className = 'form-banner show ' + kind;
+      el.textContent = msg;
+    }
+    function hideBanner(){
+      var el = $('reportBanner');
+      el.className = 'form-banner';
+      el.textContent = '';
+    }
+    function setFormEnabled(enabled, reason){
+      $('reportSubmitBtn').disabled = !enabled;
+      if (!enabled && reason) showBanner('info', reason);
+    }
+
+    function showInnovationBanner(kind, msg){
+      var el = $('innovationBanner');
+      el.className = 'form-banner show ' + kind;
+      el.textContent = msg;
+    }
+    function hideInnovationBanner(){
+      var el = $('innovationBanner');
+      el.className = 'form-banner';
+      el.textContent = '';
+    }
+
+    function setInnovationFormEnabled(enabled, reason){
+      $('innovationSubmitBtn').disabled = !enabled;
+      if (!enabled && reason) showInnovationBanner('info', reason);
+    }
+
+    async function initCapabilities(){
+      if (!window.claude || !window.claude.use) {
+        setFormEnabled(false, 'Este visualizador não consegue salvar dados aqui — abra o cockpit publicado em claude.ai pra reportar uma ferramenta.');
+        setInnovationFormEnabled(false, 'Este visualizador não consegue salvar dados aqui — abra o cockpit publicado em claude.ai pra reportar uma inovação.');
+        subscribeReports();
+        subscribeInnovations();
+        return;
+      }
+      try { userApi = await window.claude.use('user'); } catch(e){ userApi = null; }
+      try { dbApi = await window.claude.use('db'); } catch(e){ dbApi = null; }
+      try { assetsApi = await window.claude.use('assets'); } catch(e){ assetsApi = null; }
+      try { downloadsApi = await window.claude.use('downloads'); } catch(e){ downloadsApi = null; }
+
+      if (!dbApi || !assetsApi) {
+        setFormEnabled(false, 'Pra enviar um report, você precisa ter acesso de Colaborador (ou superior) a este cockpit — peça o Lucas pra te adicionar.');
+      } else {
+        setFormEnabled(true);
+      }
+      if (!dbApi) {
+        setInnovationFormEnabled(false, 'Pra reportar uma inovação, você precisa ter acesso de Colaborador (ou superior) a este cockpit — peça o Lucas pra te adicionar.');
+      } else {
+        setInnovationFormEnabled(true);
+      }
+      subscribeReports();
+      subscribeInnovations();
+    }
+
+    // ---- form submit ----
+    $('reportForm').addEventListener('submit', async function(ev){
+      ev.preventDefault();
+      hideBanner();
+
+      if (!dbApi || !assetsApi) {
+        showBanner('err', 'Não foi possível conectar ao armazenamento deste cockpit agora.');
+        return;
+      }
+      var missingToggle =
+        !$('repAmbiente').value ? 'ambiente' :
+        !$('repGithub').value ? 'disponível no GitHub' :
+        !$('repAtualizacao').value ? 'atualização dos dados' :
+        !$('repDisponibilizar').value ? 'disponibilizar para outras áreas' : null;
+      if (missingToggle) {
+        showBanner('err', 'Selecione uma opção para "' + missingToggle + '" antes de enviar.');
+        return;
+      }
+      var printFiles = Array.prototype.slice.call($('repPrints').files || []);
+      for (var pi = 0; pi < printFiles.length; pi++) {
+        if (printFiles[pi].size > 20 * 1024 * 1024) {
+          showBanner('err', 'O print "' + printFiles[pi].name + '" está maior que 20 MB (limite da plataforma) — reduza o tamanho antes de enviar.');
+          return;
+        }
+      }
+      var videoFile = $('repVideo').files[0];
+      if (videoFile) {
+        if (['video/mp4', 'video/webm'].indexOf(videoFile.type) === -1) {
+          showBanner('err', 'O vídeo precisa estar em MP4 ou WEBM — arquivos .MOV (QuickTime) não são aceitos. Converta o arquivo pra MP4, ou cole um link dele (Loom, Google Drive etc.) no campo de link, logo abaixo do upload, em vez de anexar o arquivo.');
+          return;
+        }
+        if (videoFile.size > 20 * 1024 * 1024) {
+          showBanner('err', 'O vídeo está maior que 20 MB — esse é o limite da plataforma pra upload direto (não é algo que dá pra aumentar). Cole um link dele (Loom, Google Drive etc.) no campo de link, logo abaixo do upload, em vez de anexar o arquivo.');
+          return;
+        }
+      }
+
+      var btn = $('reportSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      try {
+        var prints = [];
+        for (var i = 0; i < printFiles.length; i++) {
+          prints.push(await assetsApi.upload(printFiles[i]));
+        }
+
+        var videoAsset = null;
+        if (videoFile) videoAsset = await assetsApi.upload(videoFile);
+
+        var submitterId = null;
+        try { submitterId = userApi ? await userApi.id() : null; } catch(e){ submitterId = null; }
+
+        var docId = 'r_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
+        var record = {
+          nome: $('repNome').value.trim(),
+          desenvolvidoPor: $('repDesenvolvido').value.trim(),
+          responsavel: $('repResponsavel').value.trim(),
+          descritivo: $('repDescritivo').value.trim(),
+          area: Array.prototype.slice.call($('repArea').selectedOptions).map(function(o){ return o.value; }),
+          ambiente: $('repAmbiente').value,
+          linkAcesso: $('repLink').value.trim() || null,
+          disponivelGithub: $('repGithub').value,
+          linkGithub: $('repGithub').value === 'Sim' ? ($('repGithubLink').value.trim() || null) : null,
+          atualizacaoDados: $('repAtualizacao').value,
+          disponibilizarOutrasAreas: $('repDisponibilizar').value,
+          dataUltimaAtualizacao: $('repData').value,
+          frequenciaUso: $('repFrequencia').value,
+          prints: prints.map(function(p){ return { id: p.id }; }),
+          videoAsset: videoAsset ? { id: videoAsset.id } : null,
+          videoLink: $('repVideoLink').value.trim() || null,
+          submittedById: submitterId,
+          submittedAt: new Date().toISOString()
+        };
+
+        await dbApi.doc('reports/' + docId).set(record);
+
+        $('reportForm').reset();
+        Array.prototype.slice.call(document.querySelectorAll('.toggle-opt')).forEach(function(b){ b.classList.remove('selected'); });
+        $('repAmbiente').value = ''; $('repGithub').value = ''; $('repAtualizacao').value = ''; $('repDisponibilizar').value = '';
+        $('repLinkWrap').hidden = true;
+        $('repGithubLinkWrap').hidden = true;
+        hideBanner();
+        closeModal('reportToolModalOverlay');
+        showToast('Ferramenta adicionada com sucesso!');
+      } catch(err) {
+        var detail = (err && (err.code || err.message))
+          ? ' (' + [err.code, err.message].filter(Boolean).join(' — ') + ')'
+          : '';
+        showBanner('err', 'Não foi possível enviar o report agora. Tente de novo em instantes.' + detail);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Enviar report';
+      }
+    });
+
+    // ---- Ferramentas Reportadas (grouped by área) ----
+    function escapeHtml(s){
+      return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){
+        return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+      });
+    }
+
+    function subscribeReports(){
+      if (!dbApi) {
+        $('reportedToolsBody').innerHTML = '<div class="reported-empty">Abra este cockpit publicado em claude.ai, com uma conta da organização DUX, para ver os reports enviados.</div>';
+        return;
+      }
+      dbApi.collection('reports').onSnapshot(function(snap){
+        renderReported(snap.docs.map(function(d){ return d.data(); }));
+      }, function(){
+        $('reportedToolsBody').innerHTML = '<div class="reported-empty">Não foi possível carregar os reports agora.</div>';
+      });
+    }
+
+    function toolDetailHtml(it, who){
+      var html = '';
+      html += '<div class="reported-desc">' + escapeHtml(it.descritivo) + '</div>';
+      html += '<div class="reported-tags">';
+      (Array.isArray(it.area) ? it.area : [it.area || 'Outro']).forEach(function(a){
+        html += '<span class="status-pill construcao">' + escapeHtml(a) + '</span>';
+      });
+      html += '<span class="env-pill">' + escapeHtml(it.ambiente) + '</span>';
+      html += '<span class="status-pill ' + (it.atualizacaoDados === 'Manual' ? 'pausado' : 'uso') + '">' + escapeHtml(it.atualizacaoDados) + '</span>';
+      html += '<span class="status-pill ' + (it.disponibilizarOutrasAreas === 'Sim' ? 'uso' : 'incipiente') + '">Compartilhar p/ outras áreas: ' + escapeHtml(it.disponibilizarOutrasAreas) + '</span>';
+      html += '<span class="status-pill construcao">Uso: ' + escapeHtml(it.frequenciaUso) + '</span>';
+      if (it.disponivelGithub) html += '<span class="status-pill ' + (it.disponivelGithub === 'Sim' ? 'uso' : 'incipiente') + '">GitHub: ' + escapeHtml(it.disponivelGithub) + '</span>';
+      html += '</div>';
+      html += '<div class="reported-meta" style="margin-bottom:6px;">Dev.: ' + escapeHtml(it.desenvolvidoPor) + ' · Responsável: ' + escapeHtml(it.responsavel) +
+              (who ? ' · Reportado por: ' + escapeHtml(who) : '') + ' · Reportado em ' + escapeHtml(formatDate(it.submittedAt)) + '</div>';
+      html += '<div class="reported-links">';
+      if (it.linkAcesso) html += '<a href="' + escapeHtml(it.linkAcesso) + '" target="_blank" rel="noopener">Acessar ferramenta ↗</a>';
+      if (it.linkGithub) html += '<a href="' + escapeHtml(it.linkGithub) + '" target="_blank" rel="noopener">Repositório GitHub ↗</a>';
+      if (it.videoLink) html += '<a href="' + escapeHtml(it.videoLink) + '" target="_blank" rel="noopener">Vídeo (link) ↗</a>';
+      html += '</div>';
+
+      // Prints/vídeo anexados: exibidos inline (não como link de navegação de página —
+      // a rota de asset só serve o arquivo em si, abrir como aba cheia dá "not found").
+      var printsOk = (it.prints || []).filter(function(p){ return p && p.id; });
+      if (printsOk.length || (it.videoAsset && it.videoAsset.id)) {
+        html += '<div class="detail-media">';
+        printsOk.forEach(function(p, idx){
+          var src = '/_blob/' + encodeURIComponent(p.id);
+          html += '<div class="detail-media-item">' +
+            '<img class="detail-media-img" src="' + src + '" alt="Print ' + (idx + 1) + '" loading="lazy">' +
+            '<span class="detail-media-missing" hidden>Print indisponível</span>' +
+            '<a href="' + src + '" download="print-' + (idx + 1) + '.png">Baixar print ' + (idx + 1) + ' ⭳</a>' +
+          '</div>';
+        });
+        if (it.videoAsset && it.videoAsset.id) {
+          var vsrc = '/_blob/' + encodeURIComponent(it.videoAsset.id);
+          html += '<div class="detail-media-item">' +
+            '<video class="detail-media-img" src="' + vsrc + '" controls preload="metadata"></video>' +
+            '<span class="detail-media-missing" hidden>Vídeo indisponível</span>' +
+            '<a href="' + vsrc + '" download="video">Baixar vídeo ⭳</a>' +
+          '</div>';
+        }
+        html += '</div>';
+      }
+      return html;
+    }
+
+    async function renderReported(items){
+      var body = $('reportedToolsBody');
+      if (!items || !items.length) {
+        body.innerHTML = '<div class="reported-empty">Ainda não há nenhum report enviado. Use a aba "Reportar Ferramenta" para adicionar o primeiro.</div>';
+        return;
+      }
+
+      // Resolve display names for "reportado por", best-effort.
+      var ids = items.map(function(it){ return it.submittedById; }).filter(Boolean);
+      var names = {};
+      if (userApi && ids.length) {
+        try { names = await userApi.profiles(ids); } catch(e){ names = {}; }
+      }
+
+      var byArea = {};
+      items.forEach(function(it){
+        // it.area pode ser string (registros antigos, uma área só) ou array (v24+, múltiplas áreas)
+        var itAreas = Array.isArray(it.area) ? it.area : [it.area || 'Outro'];
+        if (!itAreas.length) itAreas = ['Outro'];
+        itAreas.forEach(function(area){
+          if (!byArea[area]) byArea[area] = [];
+          byArea[area].push(it);
+        });
+      });
+      var areas = AREA_ORDER.filter(function(a){ return byArea[a] && byArea[a].length; });
+      Object.keys(byArea).forEach(function(a){ if (areas.indexOf(a) === -1) areas.push(a); });
+
+      var html = '';
+      areas.forEach(function(area){
+        html += '<details class="reported-area" open>';
+        html += '<summary class="reported-area-head">' + escapeHtml(area) + '<span class="count">' + byArea[area].length + '</span></summary>';
+        html += '<div class="tools-table-wrap"><table class="tools-table"><thead><tr>' +
+          '<th>Ferramenta</th><th>Ambiente</th><th>Atualizado em</th><th>Reportado em</th><th></th>' +
+          '</tr></thead><tbody>';
+        byArea[area].forEach(function(it){
+          var globalIdx = items.indexOf(it);
+          html += '<tr>';
+          html += '<td class="tool-name">' + escapeHtml(it.nome) + '</td>';
+          html += '<td><span class="env-pill">' + escapeHtml(it.ambiente) + '</span></td>';
+          html += '<td class="tool-who">' + escapeHtml(it.dataUltimaAtualizacao || '—') + '</td>';
+          html += '<td class="tool-who">' + escapeHtml(formatDate(it.submittedAt)) + '</td>';
+          html += '<td class="col-eye"><button type="button" class="icon-eye-btn" data-detail-tool-idx="' + globalIdx + '" title="Ver detalhes"><span class="icon-eye-dot"></span></button></td>';
+          html += '</tr>';
+        });
+        html += '</tbody></table></div>';
+        html += '</details>';
+      });
+      body.innerHTML = html;
+
+      Array.prototype.slice.call(body.querySelectorAll('[data-detail-tool-idx]')).forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var it = items[Number(btn.getAttribute('data-detail-tool-idx'))];
+          var who = it.submittedById && names[it.submittedById] && names[it.submittedById].name;
+          openDetailModal(it.nome, toolDetailHtml(it, who));
+        });
+      });
+    }
+
+    // ---- Reportar Inovação: parse do texto colado (pode ter 1+ fluxos) ----
+    // Formato esperado (ver INNOVATION_PROMPT):
+    //   ÁREA: <área>
+    //   --- INOVAÇÃO 1 ---
+    //   TÍTULO: <título>
+    //   RESUMO:
+    //   <texto>
+    //   --- INOVAÇÃO 2 --- ...
+    function parseInnovationPaste(raw){
+      var text = raw
+        .replace(/=+\s*COLE ISTO NO PORTAL DUX\s*=+/i, '')
+        .replace(/=+\s*FIM\s*=+/i, '')
+        .trim();
+
+      var globalAreaMatch = text.match(/[ÁA]REA:\s*(.+)/i);
+      var defaultArea = globalAreaMatch ? globalAreaMatch[1].trim() : 'Outro';
+
+      var markerRe = /-{2,}\s*INOVA[ÇC][AÃ]O\s*\d*\s*-{2,}/gi;
+      var parts = text.split(markerRe);
+      // Se não houver nenhum marcador "--- INOVAÇÃO N ---", parts terá 1 único item (o texto inteiro).
+      var chunks = parts.length > 1 ? parts.slice(1) : parts;
+
+      var results = [];
+      chunks.forEach(function(chunk){
+        var tituloMatch = chunk.match(/T[IÍ]TULO:\s*(.+)/i);
+        if (!tituloMatch) return; // chunk sem título reconhecível — ignora
+        var titulo = tituloMatch[1].trim();
+        var areaMatch = chunk.match(/[ÁA]REA:\s*(.+)/i);
+        var area = areaMatch ? areaMatch[1].trim() : defaultArea;
+        var resumoMatch = chunk.match(/RESUMO:\s*([\s\S]*)/i);
+        var texto = resumoMatch
+          ? resumoMatch[1].trim()
+          : chunk.replace(/T[IÍ]TULO:.*$/im, '').replace(/[ÁA]REA:.*$/im, '').trim();
+        if (!texto) return;
+
+        var descricaoMatch = chunk.match(/DESCRI[ÇC][AÃ]O:\s*(.+)/i);
+        var frequenciaMatch = chunk.match(/FREQU[ÊE]NCIA:\s*(.+)/i);
+        var escopoMatch = chunk.match(/ESCOPO:\s*(.+)/i);
+        var descricao = descricaoMatch ? descricaoMatch[1].trim() : (texto.split('\n')[0] || '').slice(0, 160);
+        var frequencia = frequenciaMatch ? frequenciaMatch[1].trim() : '—';
+        var escopo = escopoMatch ? escopoMatch[1].trim() : '—';
+
+        results.push({ titulo: titulo, area: area, descricao: descricao, frequencia: frequencia, escopo: escopo, texto: texto });
+      });
+      return results;
+    }
+
+    // ---- Reportar Inovação: form submit ----
+    $('innovationForm').addEventListener('submit', async function(ev){
+      ev.preventDefault();
+      hideInnovationBanner();
+
+      if (!dbApi) {
+        showInnovationBanner('err', 'Não foi possível conectar ao armazenamento deste cockpit agora.');
+        return;
+      }
+      var raw = $('innovationPaste').value.trim();
+      if (!raw) {
+        showInnovationBanner('err', 'Cole o texto que o Claude te devolveu antes de enviar.');
+        return;
+      }
+      var parsed = parseInnovationPaste(raw);
+      if (!parsed.length) {
+        showInnovationBanner('err', 'Não consegui identificar o formato esperado (TÍTULO/RESUMO) no texto colado. Confirme que copiou o bloco inteiro entre as linhas =====, como o Claude te indicou.');
+        return;
+      }
+
+      var btn = $('innovationSubmitBtn');
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      try {
+        var submitterId = null;
+        try { submitterId = userApi ? await userApi.id() : null; } catch(e){ submitterId = null; }
+        var now = new Date().toISOString();
+
+        for (var i = 0; i < parsed.length; i++) {
+          var docId = 'i_' + Date.now().toString(36) + '_' + i + '_' + Math.random().toString(36).slice(2, 8);
+          await dbApi.doc('innovations/' + docId).set({
+            titulo: parsed[i].titulo,
+            area: parsed[i].area,
+            descricao: parsed[i].descricao,
+            frequencia: parsed[i].frequencia,
+            escopo: parsed[i].escopo,
+            texto: parsed[i].texto,
+            submittedById: submitterId,
+            submittedAt: now
+          });
+        }
+
+        $('innovationForm').reset();
+        $('innovationPromptBox').value = INNOVATION_PROMPT;
+        hideInnovationBanner();
+        closeModal('reportInnovationModalOverlay');
+        showToast(parsed.length === 1 ? 'Inovação reportada com sucesso!' : parsed.length + ' inovações reportadas com sucesso!');
+      } catch(err) {
+        var detail = (err && (err.code || err.message))
+          ? ' (' + [err.code, err.message].filter(Boolean).join(' — ') + ')'
+          : '';
+        showInnovationBanner('err', 'Não foi possível enviar agora. Tente de novo em instantes.' + detail);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Submeter';
+      }
+    });
+
+    // ---- Inovações Reportadas (lista, mais recentes primeiro) ----
+    function subscribeInnovations(){
+      if (!dbApi) {
+        $('reportedInnovationsBody').innerHTML = '<div class="reported-empty">Abra este cockpit publicado em claude.ai, com uma conta da organização DUX, para ver as inovações reportadas.</div>';
+        return;
+      }
+      dbApi.collection('innovations').onSnapshot(function(snap){
+        renderInnovations(snap.docs.map(function(d){ return d.data(); }));
+      }, function(){
+        $('reportedInnovationsBody').innerHTML = '<div class="reported-empty">Não foi possível carregar as inovações agora.</div>';
+      });
+    }
+
+    function formatDate(iso){
+      if (!iso) return '—';
+      try {
+        var d = new Date(iso);
+        return d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+      } catch(e){ return iso; }
+    }
+
+    function slugify(s){
+      return String(s || 'inovacao').toLowerCase()
+        .normalize('NFD').replace(/[̀-ͯ]/g, '')
+        .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || 'inovacao';
+    }
+
+    function innovationDetailHtml(it, who){
+      var html = '';
+      html += '<div class="innovation-meta">Responsável: ' + escapeHtml(who) + ' · ' + escapeHtml(formatDate(it.submittedAt)) + '</div>';
+      html += '<div class="reported-tags" style="margin:10px 0;">';
+      html += '<span class="status-pill construcao">Área: ' + escapeHtml(it.area || 'Outro') + '</span>';
+      html += '<span class="status-pill uso">Frequência: ' + escapeHtml(it.frequencia || '—') + '</span>';
+      html += '<span class="status-pill incipiente">Escopo: ' + escapeHtml(it.escopo || '—') + '</span>';
+      html += '</div>';
+      if (it.descricao) html += '<div class="reported-desc" style="margin-bottom:10px;">' + escapeHtml(it.descricao) + '</div>';
+      html += '<div class="innovation-text">' + escapeHtml(it.texto) + '</div>';
+      html += '<button type="button" class="innovation-download" id="detailDownloadBtn">Baixar texto (.txt)</button>';
+      return html;
+    }
+
+    async function renderInnovations(items){
+      var body = $('reportedInnovationsBody');
+      if (!items || !items.length) {
+        body.innerHTML = '<div class="reported-empty">Ainda não há nenhuma inovação reportada. Use o botão "Reportar Inovação" para adicionar a primeira.</div>';
+        return;
+      }
+
+      // Mais recente primeiro — cada inovação é sua própria linha (nunca lumped), com a área como coluna.
+      items = items.slice().sort(function(a, b){
+        return (b.submittedAt || '').localeCompare(a.submittedAt || '');
+      });
+
+      var ids = items.map(function(it){ return it.submittedById; }).filter(Boolean);
+      var names = {};
+      if (userApi && ids.length) {
+        try { names = await userApi.profiles(ids); } catch(e){ names = {}; }
+      }
+
+      var html = '<div class="tools-table-wrap"><table class="tools-table"><thead><tr>' +
+        '<th>Descrição</th><th>Responsável</th><th>Área</th><th></th>' +
+        '</tr></thead><tbody>';
+      items.forEach(function(it, idx){
+        var who = (it.submittedById && names[it.submittedById] && names[it.submittedById].name) || 'Equipe DUX';
+        html += '<tr>';
+        html += '<td class="tool-desc">' + escapeHtml(it.descricao || it.titulo || '—') + '</td>';
+        html += '<td class="tool-who">' + escapeHtml(who) + '</td>';
+        html += '<td><span class="status-pill construcao">' + escapeHtml(it.area || 'Outro') + '</span></td>';
+        html += '<td class="col-eye"><button type="button" class="icon-eye-btn" data-detail-innov-idx="' + idx + '" title="Ver detalhes"><span class="icon-eye-dot"></span></button></td>';
+        html += '</tr>';
+      });
+      html += '</tbody></table></div>';
+      body.innerHTML = html;
+
+      Array.prototype.slice.call(body.querySelectorAll('[data-detail-innov-idx]')).forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var it = items[Number(btn.getAttribute('data-detail-innov-idx'))];
+          var who = (it.submittedById && names[it.submittedById] && names[it.submittedById].name) || 'Equipe DUX';
+          openDetailModal(it.titulo, innovationDetailHtml(it, who));
+          var dlBtn = $('detailDownloadBtn');
+          if (dlBtn) dlBtn.addEventListener('click', async function(){
+            if (!downloadsApi) {
+              dlBtn.textContent = 'Download indisponível neste visualizador';
+              return;
+            }
+            var content = it.titulo + '\nÁrea: ' + (it.area || 'Outro') + '\nFrequência: ' + (it.frequencia || '—') + '\nEscopo: ' + (it.escopo || '—') +
+              '\nResponsável: ' + who + '\nData: ' + formatDate(it.submittedAt) + '\n\n' + it.texto;
+            try {
+              await downloadsApi.save({ filename: slugify(it.titulo) + '.txt', data: content });
+            } catch(e) { /* viewer declined ou indisponível — nada a fazer */ }
+          });
+        });
+      });
+    }
+
+    initCapabilities();
+
+    // ---- Links diretos por #hash: #tools (2ª aba), #reportar-ferramenta / #reportar-inovacao (abre o modal direto) ----
+    function routeHash(){
+      var hash = (location.hash || '').replace('#', '').toLowerCase();
+      if (!hash) return;
+      var goesToTools = ['tools', 'ferramentas', 'levantamento', 'reportar-ferramenta', 'reportar-inovacao', 'inovacao'];
+      if (goesToTools.indexOf(hash) !== -1 && window.__cockpitShowPage) window.__cockpitShowPage('tools');
+      if (hash === 'reportar-ferramenta') openModal('reportToolModalOverlay');
+      if (hash === 'reportar-inovacao' || hash === 'inovacao') openModal('reportInnovationModalOverlay');
+    }
+    routeHash();
+    window.addEventListener('hashchange', routeHash);
+  })();
+</script>
